@@ -1,0 +1,31 @@
+/**
+ * 公开前台全局样式（精简版，不引 Element Plus 样式）。
+ * 色板由 styles/tokens.css 统一提供，与 apps/admin 保持同一套基础变量。
+ */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'PingFang SC',
+    'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif;
+  background: var(--ssot-bg);
+  color: var(--ssot-ink);
+}
+
+.mono {
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+  font-size: 12px;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--ssot-muted);
+}

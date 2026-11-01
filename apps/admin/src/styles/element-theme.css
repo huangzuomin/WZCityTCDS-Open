@@ -1,0 +1,38 @@
+/**
+ * Element Plus 主题覆盖层
+ * 把默认蓝色主题收敛到 SSOT 色板（墨绿为主色），避免组件与页面配色新旧混排。
+ * 必须在 element-plus/dist/index.css 之后加载。
+ */
+:root {
+  /* 主色：墨绿，对应 demo 的 CTA 色系 */
+  --el-color-primary: #138577;
+  --el-color-primary-light-3: #5aaaa0;
+  --el-color-primary-light-5: #89c2bb;
+  --el-color-primary-light-7: #b8dad6;
+  --el-color-primary-light-8: #d0e7e4;
+  --el-color-primary-light-9: #e7f3f1;
+  --el-color-primary-dark-2: #0f6a5f;
+
+  /* 语义色对齐演示色板 */
+  --el-color-warning: #e29a56;
+  --el-color-warning-light-9: #fff1e5;
+  --el-color-info: #758599;
+
+  /* 文本与描边 */
+  --el-text-color-primary: #152c3c;
+  --el-text-color-regular: #4b5f70;
+  --el-text-color-secondary: #758599;
+  --el-text-color-placeholder: #a8b5bf;
+  --el-border-color: #e4e9ee;
+  --el-border-color-light: #eff3f5;
+  --el-border-color-lighter: #f0f3f6;
+  --el-bg-color-page: #f5f7fa;
+
+  /* 圆角与字体 */
+  --el-border-radius-base: 8px;
+  --el-border-radius-small: 6px;
+  --el-card-border-radius: 12px;
+  --el-font-family: Inter, -apple-system, BlinkMacSystemFont, 'PingFang SC',
+    'Microsoft YaHei', sans-serif;
+  --el-box-shadow-light: 0 8px 25px rgba(20, 48, 74, 0.045);
+}

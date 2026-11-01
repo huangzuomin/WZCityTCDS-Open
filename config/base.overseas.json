@@ -1,0 +1,20 @@
+{
+  "agent": {
+    "image": {
+      "description": "Generate or edit images via the capability dispatcher. Use `hub_generate_image` with `vendor` (banana/seedream/gpt-image/midjourney/kling) and `model_id` from the registry. Default vendor: banana. Reuse style_descriptors / character_refs from prior Output Summary. Pass sourceNodeId when editing canvas. Returns image paths.",
+      "tools": {
+        "hub_generate_image": true,
+        "hub_list_capabilities": true,
+        "hub_get_model_concurrency": true
+      }
+    },
+    "video": {
+      "description": "Generate video via the capability dispatcher. Use `hub_generate_video` with `vendor` (MiniMax/veo3/seedance/jimeng/kling) and `mode`. Default vendor: MiniMax.",
+      "tools": {
+        "hub_generate_video": true,
+        "hub_list_capabilities": true,
+        "hub_get_model_concurrency": true
+      }
+    }
+  }
+}

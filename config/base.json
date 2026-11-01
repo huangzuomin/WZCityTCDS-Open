@@ -1,0 +1,311 @@
+{
+  "$schema": "https://opencode.ai/schema.json",
+  "experimental": {
+    "mcp_timeout": 3600000
+  },
+  "tools": {},
+  "mcp": {
+    "hub": {
+      "type": "local",
+      "command": [
+        "node",
+        "../mcp-tools/dist/main.js"
+      ],
+      "environment": {
+        "GATEWAY_URL": "http://localhost:8001"
+      }
+    }
+  },
+  "agent": {
+    "build": {
+      "disable": true
+    },
+    "plan": {
+      "disable": true
+    },
+    "media-agent": {
+      "mode": "primary",
+      "description": "AI multimedia creation orchestrator. Plans and coordinates image / video / speech / music generation via sub-agents. When a requested video model is unavailable, fall back to MiniMax-H3 (Sora is not supported — inform the user). At session start, call hub_memory_list (scope=all, projectRoot=<cwd>) to surface saved style preferences, character anchors and asset pins. When dispatching to sub-agents, lift relevant memory entries into the prompt and pass matching asset-pin URIs as reference inputs.",
+      "steps": 400,
+      "tools": {
+        "hub_*": false,
+        "task": true,
+        "hub_read": true,
+        "hub_analyse_media": true,
+        "hub_write": true,
+        "hub_edit": true,
+        "hub_save_file_to_session": true,
+        "hub_image_search": true,
+        "hub_submit_dag": true,
+        "hub_upload_to_cdn": true,
+        "hub_open_remote_tool_gui": true,
+        "hub_audio_transcribe_lyrics": true,
+        "hub_audio_analyze_music": true,
+        "hub_audio_separate": true,
+        "hub_audio_meta": true,
+        "hub_audio_subclip_batch": true,
+        "hub_get_model_concurrency": true,
+        "hub_list_capabilities": true,
+        "hub_ffmpeg": true,
+        "hub_media_generate_subtitle": true,
+        "hub_preview_and_collect_feedback": true,
+        "hub_canvas_list_nodes": true,
+        "hub_canvas_get_node": true,
+        "hub_canvas_grep_text": true,
+        "hub_canvas_read_text": true,
+        "hub_canvas_search_nodes": true,
+        "hub_canvas_write_text_node": true,
+        "hub_canvas_apply_text_edits": true,
+        "hub_canvas_write_table_node": true,
+        "hub_canvas_write_media_node": true,
+        "hub_canvas_write_file_node": true,
+        "hub_canvas_group_nodes": true,
+        "hub_canvas_group_recent_outputs": true,
+        "hub_canvas_relayout_group": true,
+        "hub_get_asset_relations": true,
+        "hub_workspace_list_assets": true,
+        "hub_memory_list": true,
+        "hub_memory_read": true,
+        "hub_memory_write": true,
+        "hub_memory_delete": true,
+        "hub_memory_search": true,
+        "hub_asset_center_search": true,
+        "hub_asset_center_use_entity": true,
+        "hub_reload_skills": true,
+        "hub_recommend_plugin": true,
+        "hub_plugin_agent_*": true,
+        "hub_feishu": true,
+        "codesearch": false,
+        "apply_patch": false,
+        "plan-enter": false,
+        "plan-exit": false,
+        "read": false,
+        "write": false,
+        "edit": false
+      },
+      "permission": {
+        "question": "allow",
+        "skill": {
+          "*": "allow"
+        }
+      }
+    },
+    "comfyui-agent": {
+      "mode": "subagent",
+      "description": "ComfyUI 工作流子 Agent：解析显式 @ 的或当前画布中的 workflow，读取真实 graph，引导参数与参考素材选择，无头确认执行，保存用户确认的修改；除非用户明确要求，否则不打开编辑器。",
+      "steps": 200,
+      "permission": {
+        "skill": {
+          "*": "deny"
+        },
+        "question": "allow"
+      },
+      "tools": {
+        "hub_*": false,
+        "feishu_*": false,
+        "task": false,
+        "hub_open_comfyui": true,
+        "hub_list_comfyui_workflow": true,
+        "hub_get_comfyui_workflow": true,
+        "hub_list_comfyui_template": true,
+        "hub_run_comfyui_workflow": true,
+        "hub_edit_comfyui_workflow": true,
+        "hub_save_comfyui_workflow": true,
+        "hub_save_comfyui_run_as_workflow": true,
+        "hub_get_comfyui_run_status": true,
+        "hub_canvas_list_nodes": true,
+        "hub_canvas_get_node": true,
+        "hub_canvas_get_selection": true,
+        "codesearch": false,
+        "bash": false,
+        "apply_patch": false,
+        "plan-enter": false,
+        "plan-exit": false,
+        "read": false,
+        "write": false,
+        "edit": false
+      }
+    },
+    "image": {
+      "mode": "subagent",
+      "steps": 200,
+      "permission": {
+        "skill": {
+          "*": "deny"
+        }
+      },
+      "tools": {
+        "hub_*": false,
+        "feishu_*": false,
+        "task": false,
+        "hub_generate_image": true,
+        "hub_list_capabilities": true,
+        "hub_get_model_concurrency": true,
+        "hub_prompt_write": true,
+        "hub_image_remove_background": true,
+        "hub_read": true,
+        "hub_memory_list": true,
+        "hub_memory_read": true,
+        "hub_memory_write": true,
+        "hub_memory_search": true,
+        "codesearch": false,
+        "apply_patch": false,
+        "plan-enter": false,
+        "plan-exit": false,
+        "read": false,
+        "write": false,
+        "edit": false
+      }
+    },
+    "video": {
+      "mode": "subagent",
+      "description": "Generate raw video clips via the capability dispatcher. Use `hub_generate_video` with `vendor` + `mode` (t2v / i2v / first-last-frame / multimodal / video-edit / video-extend / motion-control / avatar / omni). Speech narration → speech agent, music / BGM → music agent. Sora not supported. Reuse model_name / first_frame_style from prior Output Summary for consistency. Pass sourceNodeId when editing canvas nodes. Seedance reference-vs-frame constraints live in the Seedance model guide; read it with `hub_read` when the routing contract selects Seedance.",
+      "steps": 200,
+      "permission": {
+        "skill": {
+          "*": "deny"
+        }
+      },
+      "tools": {
+        "hub_*": false,
+        "feishu_*": false,
+        "task": false,
+        "hub_generate_video": true,
+        "hub_list_capabilities": true,
+        "hub_get_model_concurrency": true,
+        "hub_prompt_write": true,
+        "hub_read": true,
+        "hub_memory_list": true,
+        "hub_memory_read": true,
+        "hub_memory_write": true,
+        "hub_memory_search": true,
+        "codesearch": false,
+        "apply_patch": false,
+        "plan-enter": false,
+        "plan-exit": false,
+        "read": false,
+        "write": false,
+        "edit": false
+      }
+    },
+    "speech": {
+      "mode": "subagent",
+      "description": "Generate spoken narration / dialogue, multi-speaker scripts, and ASR. Returns audio_path + subtitle_path. Reuse voice_id from prior Output Summary for voice consistency. Pass sourceNodeId when editing canvas nodes. Music / BGM / songs / covers are NOT in scope — delegate to music agent.",
+      "steps": 200,
+      "permission": {
+        "skill": {
+          "*": "deny"
+        }
+      },
+      "tools": {
+        "hub_*": false,
+        "feishu_*": false,
+        "task": false,
+        "hub_get_voice_id": true,
+        "hub_audio_generation": true,
+        "hub_seedaudio_generation": true,
+        "hub_audios_batch_generation": true,
+        "hub_voice_isolation": true,
+        "hub_read": true,
+        "hub_memory_list": true,
+        "hub_memory_read": true,
+        "hub_memory_write": true,
+        "hub_memory_search": true,
+        "hub_audio_meta": true,
+        "codesearch": false,
+        "apply_patch": false,
+        "plan-enter": false,
+        "plan-exit": false,
+        "read": false,
+        "write": false,
+        "edit": false
+      }
+    },
+    "music": {
+      "mode": "subagent",
+      "description": "Generate instrumental music (BGM), songs with vocals, covers (翻唱) from reference audio, and lyrics. Generate BGM ONCE per project — never per-clip (clip-boundary discontinuities are audible). Pass sourceNodeId when editing canvas nodes. Speech / narration are NOT in scope — delegate to speech agent.",
+      "steps": 200,
+      "permission": {
+        "skill": {
+          "*": "deny"
+        }
+      },
+      "tools": {
+        "hub_*": false,
+        "feishu_*": false,
+        "task": false,
+        "hub_music_generation_song": true,
+        "hub_music_generation_instrumental": true,
+        "hub_music_generation_elevenlabs": true,
+        "hub_music_cover_preprocess": true,
+        "hub_music_cover_generate_with_lyrics": true,
+        "hub_music_cover_generate_oneshot": true,
+        "hub_lyrics_generation": true,
+        "hub_audio_meta": true,
+        "hub_read": true,
+        "hub_memory_list": true,
+        "hub_memory_read": true,
+        "hub_memory_write": true,
+        "hub_memory_search": true,
+        "codesearch": false,
+        "apply_patch": false,
+        "plan-enter": false,
+        "plan-exit": false,
+        "read": false,
+        "write": false,
+        "edit": false
+      }
+    },
+    "editing": {
+      "mode": "subagent",
+      "description": "Video and audio post-production: merge clips (with scale handling), embed audio (narration/BGM with ducking), lip-sync (face speaking only), MV pipeline (lyrics + storyboard + assembly), ffmpeg fallback. Reuse scale_mode / bgm_duck_db from prior Output Summary for consistency. Pass sourceNodeId when editing canvas video. Returns final video path.",
+      "steps": 200,
+      "permission": {
+        "skill": {
+          "*": "deny"
+        },
+        "bash": {
+          "*": "allow",
+          "cp *": "deny",
+          "mv *": "deny",
+          "rename *": "deny",
+          "ln *": "deny",
+          "ffmpeg *": "deny"
+        }
+      },
+      "tools": {
+        "hub_*": false,
+        "feishu_*": false,
+        "task": false,
+        "hub_ffmpeg": true,
+        "hub_audio_meta": true,
+        "hub_embed_audio": true,
+        "hub_merge_videos": true,
+        "hub_batch_lip_sync": true,
+        "hub_super_resolution": false,
+        "hub_audio_subclip_batch": true,
+        "hub_audio_transcribe_lyrics": true,
+        "hub_audio_analyze_music": true,
+        "hub_audio_separate": true,
+        "hub_media_generate_subtitle": true,
+        "hub_validate_mv_storyboard": true,
+        "hub_mv_final_assembly": true,
+        "hub_canvas_get_node": true,
+        "hub_canvas_grep_text": true,
+        "hub_canvas_read_text": true,
+        "hub_canvas_write_media_node": true,
+        "hub_read": true,
+        "codesearch": false,
+        "apply_patch": false,
+        "plan-enter": false,
+        "plan-exit": false,
+        "read": false,
+        "write": false,
+        "edit": false
+      }
+    }
+  },
+  "plugin": [
+    ".opencode/plugins/session-header.ts"
+  ]
+}

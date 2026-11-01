@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'PingFang SC',
+    'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif;
+  background: var(--ssot-bg);
+  color: var(--ssot-ink);
+}
+
+.page {
+  padding: 22px 26px 44px;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--ssot-ink);
+}
+
+.page-desc {
+  font-size: 13px;
+  color: var(--ssot-muted);
+  margin-top: 4px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.mono {
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+  font-size: 12px;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--ssot-muted);
+}

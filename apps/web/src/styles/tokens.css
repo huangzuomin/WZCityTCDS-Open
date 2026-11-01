@@ -1,0 +1,32 @@
+/**
+ * SSOT 设计变量层（公开前台）
+ * 与 apps/admin/src/styles/tokens.css 保持同一套色板，两站观感一致；
+ * web 不引 Element Plus，故不含框架变量覆盖。
+ */
+:root {
+  /* 基础色板 */
+  --ssot-navy: #0a2034;
+  --ssot-navy-2: #102d45;
+  --ssot-ink: #152c3c;
+  --ssot-muted: #758599;
+  --ssot-line: #e4e9ee;
+  --ssot-paper: #f5f7fa;
+  --ssot-white: #fff;
+
+  /* 强调色 */
+  --ssot-teal: #138577;
+  --ssot-teal-pale: #e4f5ee;
+  --ssot-blue: #2d71c8;
+  --ssot-blue-pale: #edf4fd;
+  --ssot-orange: #e29a56;
+  --ssot-orange-pale: #fff1e5;
+  --ssot-purple: #7960b3;
+  --ssot-purple-pale: #f0ecfa;
+
+  /* 质感 */
+  --ssot-shadow: 0 8px 25px rgba(20, 48, 74, 0.045);
+  --ssot-radius: 15px;
+
+  /* 兼容既有引用 */
+  --ssot-bg: var(--ssot-paper);
+}

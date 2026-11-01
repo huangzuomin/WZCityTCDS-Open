@@ -1,0 +1,26 @@
+{
+  "name": "@ssot/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@esbuild/win32-x64": "0.21.3",
+    "axios": "^1.7.7",
+    "vis-network": "^10.1.2",
+    "vue": "^3.5.13",
+    "vue-router": "^4.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vue-tsc": "^2.1.10"
+  }
+}

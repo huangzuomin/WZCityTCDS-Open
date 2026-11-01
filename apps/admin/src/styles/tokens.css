@@ -1,0 +1,40 @@
+/**
+ * SSOT 设计变量层
+ * 视觉基线对齐 docs/demo/styles.css 的 :root 定义。
+ * 本文件只声明变量、不产生任何选择器副作用，后续换肤只需改这里。
+ */
+:root {
+  /* 基础色板 */
+  --ssot-navy: #0a2034;
+  --ssot-navy-2: #102d45;
+  --ssot-ink: #152c3c;
+  --ssot-muted: #758599;
+  --ssot-line: #e4e9ee;
+  --ssot-paper: #f5f7fa;
+  --ssot-white: #fff;
+
+  /* 强调色 */
+  --ssot-teal: #138577;
+  --ssot-teal-pale: #e4f5ee;
+  --ssot-blue: #2d71c8;
+  --ssot-blue-pale: #edf4fd;
+  --ssot-orange: #e29a56;
+  --ssot-orange-pale: #fff1e5;
+  --ssot-purple: #7960b3;
+  --ssot-purple-pale: #f0ecfa;
+
+  /* 质感 */
+  --ssot-shadow: 0 8px 25px rgba(20, 48, 74, 0.045);
+  --ssot-radius: 15px;
+
+  /* 外壳（侧栏渐变与状态色） */
+  --ssot-sidebar-bg: linear-gradient(180deg, #0c2842, #091d31 70%);
+  --ssot-sidebar-text: #a5bdce;
+  --ssot-sidebar-text-dim: #87a9bf;
+  --ssot-sidebar-hover: #173c58;
+  --ssot-sidebar-active-bg: linear-gradient(95deg, #1c5266, #1a485e);
+  --ssot-sidebar-accent: #6fd0bd;
+
+  /* 兼容既有引用 */
+  --ssot-bg: var(--ssot-paper);
+}

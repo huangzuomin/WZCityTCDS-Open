@@ -1,0 +1,26 @@
+{
+  "name": "ssot",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.22.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @ssot/shared build && pnpm --filter @ssot/api dev",
+    "dev:admin": "pnpm --filter @ssot/admin dev",
+    "dev:web": "pnpm --filter @ssot/web dev",
+    "build": "pnpm --filter @ssot/shared build && pnpm -r --filter \"!@ssot/shared\" build",
+    "typecheck": "pnpm -r typecheck",
+    "db:init": "pnpm --filter @ssot/api db:init",
+    "db:setup": "pnpm --filter @ssot/api db:init && pnpm --filter @ssot/api db:migrate",
+    "db:reset": "pnpm --filter @ssot/api db:reset",
+    "db:generate": "pnpm --filter @ssot/api db:generate",
+    "db:migrate": "pnpm --filter @ssot/api db:migrate",
+    "db:push": "pnpm --filter @ssot/api db:push",
+    "db:studio": "pnpm --filter @ssot/api db:studio"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}

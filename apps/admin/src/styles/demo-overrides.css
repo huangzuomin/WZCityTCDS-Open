@@ -1,0 +1,12 @@
+/* 演示后台与经典后台的少量样式冲突修正：只在 /admin/demo/* 生效 */
+
+/* global.css 给 .page 加了 padding，会叠加 demo 的 .content 内边距；演示页里归零 */
+.demo-root .page {
+  padding: 0;
+}
+
+/* 侧栏底部「切换到经典后台」按钮：复用 demo 的 .small-btn，补一个满宽布局 */
+.demo-root .demo-switch {
+  width: 100%;
+  margin-top: 12px;
+}

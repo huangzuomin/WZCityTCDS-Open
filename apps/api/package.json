@@ -1,0 +1,47 @@
+{
+  "name": "@ssot/api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "nest build",
+    "start": "node dist/main.js",
+    "dev": "nest start --watch",
+    "typecheck": "tsc --noEmit",
+    "ssg": "node dist/ssg.js",
+    "db:init": "node scripts/db-init.mjs",
+    "db:reset": "node scripts/reset-db.mjs",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/config": "^4.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/jwt": "^11.0.0",
+    "@nestjs/passport": "^11.0.0",
+    "@nestjs/platform-express": "^11.0.0",
+    "@ssot/shared": "workspace:*",
+    "drizzle-orm": "^0.36.4",
+    "ioredis": "^5.11.1",
+    "mysql2": "^3.11.5",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "pinyin-pro": "^3.26.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.0",
+    "@nestjs/schematics": "^11.0.0",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.9.0",
+    "@types/passport-jwt": "^4.0.1",
+    "dotenv": "^16.4.5",
+    "drizzle-kit": "^0.28.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
