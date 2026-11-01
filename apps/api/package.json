@@ -2,6 +2,7 @@
   "name": "@ssot/api",
   "version": "0.1.0",
   "private": true,
+  "license": "Apache-2.0",
   "scripts": {
     "build": "nest build",
     "start": "node dist/main.js",
