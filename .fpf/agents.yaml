@@ -1,0 +1,20 @@
+registry_version: 1
+project_id: WZCITYTCDS_MVP
+mode: manual
+roles:
+- role: orchestrator
+  status: CONFIGURED_NOT_VERIFIED
+  prompt: .fpf/prompts/orchestrator.md
+  session_id: null
+- role: dev_lead
+  status: CONFIGURED_NOT_VERIFIED
+  prompt: .fpf/prompts/dev_lead.md
+  session_id: null
+- role: qa_lead
+  status: CONFIGURED_NOT_VERIFIED
+  prompt: .fpf/prompts/qa_lead.md
+  session_id: null
+- role: scribe
+  status: CONFIGURED_NOT_VERIFIED
+  prompt: .fpf/prompts/scribe.md
+  session_id: null
