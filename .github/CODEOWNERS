@@ -1,0 +1,7 @@
+# Replace the placeholder with actual independent project owners.
+# This is intentionally not an active review policy until configured.
+# * @REPLACE_WITH_REVIEWER
+# AGENTS.md @REPLACE_WITH_REVIEWER
+# .github/ @REPLACE_WITH_REVIEWER
+# .fpf/ @REPLACE_WITH_REVIEWER
+# docs/coordination/ @REPLACE_WITH_REVIEWER

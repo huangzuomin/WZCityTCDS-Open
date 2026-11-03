@@ -1,0 +1,75 @@
+name: FPF Independent QA (reviewer-dispatched)
+
+on:
+  workflow_dispatch:
+    inputs:
+      tested_sha:
+        description: Exact target PR HEAD SHA
+        required: true
+        type: string
+      task_id:
+        description: FPF task ID
+        required: true
+        type: string
+      profile:
+        description: Evidence profile
+        type: choice
+        options: [Library, API-DB, Full-Stack, Rework]
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout trusted QA plan and runner from main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: trusted
+          persist-credentials: false
+      - name: Checkout candidate repository history
+        uses: actions/checkout@v4
+        with:
+          path: candidate
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Switch candidate to exact tested SHA
+        run: |
+          cd candidate
+          git fetch origin "+refs/heads/*:refs/remotes/origin/*" --prune || true
+          git fetch origin "+refs/pull/*/head:refs/remotes/origin/pull/*" || true
+          git checkout ${{ inputs.tested_sha }}
+          git config --local --unset-all http.https://github.com/.extraheader || true
+          CURRENT_SHA=$(git rev-parse HEAD)
+          if [ "$CURRENT_SHA" != "${{ inputs.tested_sha }}" ]; then
+            echo "SHA mismatch: expected ${{ inputs.tested_sha }}, got $CURRENT_SHA"
+            exit 1
+          fi
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install runner dependencies
+        run: python -m pip install jsonschema pyyaml
+      - name: Collect actual QA outputs from trusted plan
+        env:
+          PYTHONPATH: ${{ github.workspace }}/trusted:${{ github.workspace }}/trusted/.fpf/vendor
+          FPF_SHA: ${{ inputs.tested_sha }}
+          FPF_TASK: ${{ inputs.task_id }}
+          FPF_PROFILE: ${{ inputs.profile }}
+        run: |
+          python -m packages.fpf_policy.qa_collector \
+            --plan trusted/.fpf/qa-plan.json \
+            --repo candidate --out qa-artifact \
+            --task-id "$FPF_TASK" --tested-sha "$FPF_SHA" \
+            --profile "$FPF_PROFILE"
+      - name: Upload actual evidence files
+        uses: actions/upload-artifact@v4
+        with:
+          name: fpf-qa-${{ inputs.tested_sha }}
+          path: qa-artifact/*
+          if-no-files-found: error
+          retention-days: 30

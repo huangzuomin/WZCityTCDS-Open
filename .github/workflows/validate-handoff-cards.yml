@@ -1,0 +1,26 @@
+name: FPF Trusted PR Review
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+  pull_request_review:
+    types: [submitted, dismissed, edited]
+permissions:
+  contents: read
+  pull-requests: read
+  actions: read
+jobs:
+  validate-card:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install pyyaml jsonschema
+      - name: Verify independent reviewer and PR role route
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: cd .fpf/vendor && python -m packages.fpf_policy.pr_gate

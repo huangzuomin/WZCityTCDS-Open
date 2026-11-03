@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CoordinationLedger",
+  "description": "Schema for Coordinator execution ledger and idempotency state",
+  "type": "object",
+  "required": [
+    "ledger_version",
+    "updated_at",
+    "active_task",
+    "stage",
+    "history"
+  ],
+  "properties": {
+    "ledger_version": { "type": "integer", "const": 1 },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "active_task": { "type": "string" },
+    "stage": {
+      "type": "string",
+      "enum": [
+        "IDLE",
+        "WORK_ORDER_ISSUED",
+        "DEV_IN_PROGRESS",
+        "DEV_DISPATCHED",
+        "DEV_RUNNING",
+        "DEV_READY_FOR_QA",
+        "DEV_READY_AWAITING_QA_ADMISSION",
+        "DEV_BLOCKED",
+        "DEV_REJECTED",
+        "QA_ADMISSION_REVIEW",
+        "QA_DISPATCHED",
+        "QA_RUNNING",
+        "QA_RESULT_REPORTED",
+        "QA_PASSED_AWAITING_OWNER_MERGE",
+        "QA_FAILED_REWORK_REQUIRED",
+        "QA_REJECTED",
+        "BLOCKED_ON_DEPENDENCY",
+        "OWNER_DECISION_PENDING",
+        "MERGED_AND_CLOSED",
+        "MERGE_UNVERIFIED",
+        "BLOCKED"
+      ]
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["timestamp", "transition", "status"],
+        "properties": {
+          "timestamp": { "type": "string" },
+          "transition": { "type": "string" },
+          "status": { "type": "string" },
+          "actor": { "type": "string" }
+        }
+      }
+    }
+  }
+}
