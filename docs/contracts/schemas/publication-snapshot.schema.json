@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wzcitytcds.open/schemas/publication-snapshot.schema.json",
+  "title": "Publication Snapshot and Projection Contract",
+  "description": "Standard schema for immutable publication snapshots exported by WZCityTCDS for one-way projection to the Hub and consumption by public outlets.",
+  "type": "object",
+  "required": [
+    "publication_id",
+    "snapshot_revision_id",
+    "entity_id",
+    "generated_at",
+    "snapshot_digest_sha256",
+    "published_assertions",
+    "projection_metadata"
+  ],
+  "properties": {
+    "publication_id": {
+      "type": "string",
+      "pattern": "^pub_[a-zA-Z0-9_-]{12,64}$",
+      "description": "Stable publication identifier for an entity's published fact profile."
+    },
+    "snapshot_revision_id": {
+      "type": "string",
+      "pattern": "^pubrev_[a-zA-Z0-9_-]{12,64}$",
+      "description": "Immutable version identifier for this exact publication release."
+    },
+    "entity_id": {
+      "type": "string",
+      "pattern": "^ent_[a-z0-9_-]{8,64}$"
+    },
+    "entity_canonical_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "snapshot_digest_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$",
+      "description": "Deterministic Merkle or aggregate SHA-256 digest of all published assertions in this snapshot."
+    },
+    "published_assertions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "assertion_id",
+          "revision_id",
+          "property_path",
+          "raw_value",
+          "evidence_hashes"
+        ],
+        "properties": {
+          "assertion_id": { "type": "string" },
+          "revision_id": { "type": "string" },
+          "property_path": { "type": "string" },
+          "raw_value": {},
+          "unit": { "type": "string" },
+          "evidence_hashes": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+            "minItems": 1
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "projection_metadata": {
+      "type": "object",
+      "required": [
+        "kernel_system",
+        "publisher_role",
+        "outlet_scopes",
+        "is_latest_snapshot"
+      ],
+      "properties": {
+        "kernel_system": {
+          "type": "string",
+          "enum": ["WZCityTCDS-PublicationKernel"]
+        },
+        "publisher_role": {
+          "type": "string",
+          "enum": ["CHIEF_FACT_EDITOR", "AUTOMATED_RELEASE_BOT"]
+        },
+        "outlet_scopes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["HUB_ONE_WAY_PROJECTION", "PUBLIC_HTML_ARCHIVE", "REST_API", "FEED_ATOM", "MCP_ENDPOINT"]
+          },
+          "minItems": 1
+        },
+        "is_latest_snapshot": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
