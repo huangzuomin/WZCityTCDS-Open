@@ -1646,3 +1646,5 @@ export const graphApi = {
   updateNodeName: (id: number, name: string) =>
     http.patch<never, { updated: boolean; id: number; name: string }>(`/graph/nodes/${id}`, { name }),
 };
+
+export * from './review';

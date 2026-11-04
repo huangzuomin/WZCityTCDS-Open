@@ -295,7 +295,15 @@ def run_tests():
     total += res_http.testsRun
     passed += res_http.testsRun
 
-    print(f"\n=== Python Pydantic, Entity Adapter, Revision Storage & Evidence Engine & Outlets Gate & HTTP Router Test Suite Results ===")
+    # 18. Review Workbench & Ingestion Tests (Slice R2)
+    from packages.shared.python.contracts.test_review_workbench import TestReviewWorkbench
+    suite_review = unittest.TestLoader().loadTestsFromTestCase(TestReviewWorkbench)
+    res_review = runner.run(suite_review)
+    assert res_review.wasSuccessful(), f"ReviewWorkbench tests failed: {len(res_review.errors)} errors, {len(res_review.failures)} failures"
+    total += res_review.testsRun
+    passed += res_review.testsRun
+
+    print(f"\n=== Python Pydantic, Entity Adapter, Revision Storage, Evidence Engine, Outlets Gate & Review Workbench Test Suite Results ===")
     print(f"Total: {total}, Passed: {passed}, Failed: {total - passed}")
     print(f"ALL {total} PYTHON CHECKS PASSED!\n")
 
