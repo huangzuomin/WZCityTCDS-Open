@@ -1,7 +1,7 @@
 # WZCityTCDS 项目唯一事实地图（正式版）
 
 > **状态：`FORMAL_PROJECT_MAP_ACTIVE`**  
-> **当前控制器基线：`ba3bea4f7439e97ef0dd2bb601317f7fcb60edc2`**  
+> **当前控制器基线：`21f39aa9bf018f852fd096c6dd49daa8917b230e`**  
 > **主干仓库：`huangzuomin/WZCityTCDS-Open`（分支：`main`）**  
 > **治理规约：FPF 0.3 / 五权分立受控开发体系**
 
@@ -20,10 +20,10 @@
 | **S1** | 架构定位审查与边界规约落盘 (#3) | Architecture Review | COMPLETED | PASS | MERGED (03b7cb62) | N/A |
 | **S2** | 实体主数据单根对齐与枢纽接口适配契约 (#5) | DEV Lead | COMPLETED | PASS | MERGED (47c12dfc) | N/A |
 | **S3** | 事实版本链与不可变签发内核状态机 (#7) | DEV Lead | COMPLETED | PASS | MERGED (ba3bea4f) | N/A |
-| **S4** | EvidenceSpan 证据溯源与哈希验签引擎 | DEV Lead | READY_FOR_DEV | NOT_RUN | NOT_STARTED | NOT_STARTED |
-| **S5** | 机器出口与统一发布安全门禁 | DEV Lead | PLANNED | NOT_RUN | NOT_STARTED | NOT_STARTED |
+| **S4** | EvidenceSpan 证据溯源与哈希验签引擎 (#9) | DEV Lead | COMPLETED | PASS | MERGED (21f39aa9) | N/A |
+| **S5** | 机器出口与统一发布安全门禁 | DEV Lead | READY_FOR_DEV | NOT_RUN | NOT_STARTED | NOT_STARTED |
 
-当前已顺利完成 Bootstrap、S1 架构审查、S2 实体/信源契约与 S3 事实版本链状态机。后续开发进入 **S4 阶段（EvidenceSpan 证据溯源与哈希验签引擎）**。
+当前已顺利完成 Bootstrap、S1 架构定位审查、S2 实体/信源契约、S3 事实版本链状态机与 S4 证据验签引擎。后续开发进入 **S5 阶段（机器出口与统一发布安全门禁）**。
 
 ---
 
@@ -31,7 +31,7 @@
 
 - **正式主干控制器仓库**：`huangzuomin/WZCityTCDS-Open`
 - **主干分支**：`main`
-- **当前控制器不可变 SHA**：`ba3bea4f7439e97ef0dd2bb601317f7fcb60edc2`
+- **当前控制器不可变 SHA**：`21f39aa9bf018f852fd096c6dd49daa8917b230e`
 - **GitHub 分支保护**：已配置必需状态检查与独立 App 审查要求
 - **独立审查身份**：`fpf-qa-bot-huangzuomin[bot]`（GitHub App ID: 5464827）
 - **本地工位布局**：`_fpf-workspaces/WZCITYTCDS_MVP/`（`bootstrap`、`dev`、`qa` 物理隔离工作树）
@@ -63,6 +63,7 @@
   - `docs/coordination/ARCH-DECISION-01.md`
   - `docs/contracts/ENTITY-AND-SOURCE-CONTRACT.md`
   - `docs/contracts/FACT-REVISION-KERNEL-SPECIFICATION.md`
+  - `docs/contracts/EVIDENCESPAN-VERIFICATION-SPECIFICATION.md`
 - **架构硬红线**：
   - **不建立第二套城市实体主数据**：城市实体主身份、别名与重定向完全由枢纽主数据服务负责；
   - **单向受控投影**：本系统独占事实断言与出版签发写入口，签发后单向投影至枢纽供检索，枢纽不得反向改写；
@@ -108,4 +109,6 @@
   - PR #5 (`kind: POLICY_CHANGE`，commit: `47c12dfc`)
   - PR #6 (`kind: MAP_UPDATE`，commit: `939bdc8c`)
   - PR #7 (`kind: POLICY_CHANGE`，commit: `ba3bea4f`)
-- **当前执行切片**：S4（EvidenceSpan 证据溯源与哈希验签引擎）。
+  - PR #8 (`kind: MAP_UPDATE`，commit: `6722d56a`)
+  - PR #9 (`kind: POLICY_CHANGE`，commit: `21f39aa9`)
+- **当前执行切片**：S5（机器出口与统一发布安全门禁）。
