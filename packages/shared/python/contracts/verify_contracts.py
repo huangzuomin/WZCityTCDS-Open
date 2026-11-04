@@ -267,10 +267,19 @@ def run_tests():
     from packages.shared.python.contracts.test_revision_storage import TestFactRevisionStorage
     suite_rev = unittest.TestLoader().loadTestsFromTestCase(TestFactRevisionStorage)
     res_rev = runner.run(suite_rev)
-    assert res_rev.wasSuccessful(), f'FactRevisionStorage tests failed'
+    assert res_rev.wasSuccessful(), f"FactRevisionStorage tests failed: {len(res_rev.errors)} errors, {len(res_rev.failures)} failures"
     total += res_rev.testsRun
     passed += res_rev.testsRun
-    print(f'\n=== Python Pydantic, Entity Adapter & Revision Storage Test Suite Results ===')
+
+    # 15. Evidence Verification Engine & Conflict Arbitration Pipeline Tests
+    from packages.shared.python.contracts.test_evidence_engine import TestEvidenceEngine
+    suite_evid = unittest.TestLoader().loadTestsFromTestCase(TestEvidenceEngine)
+    res_evid = runner.run(suite_evid)
+    assert res_evid.wasSuccessful(), f"EvidenceEngine tests failed: {len(res_evid.errors)} errors, {len(res_evid.failures)} failures"
+    total += res_evid.testsRun
+    passed += res_evid.testsRun
+
+    print(f"\n=== Python Pydantic, Entity Adapter, Revision Storage & Evidence Engine Test Suite Results ===")
     print(f"Total: {total}, Passed: {passed}, Failed: {total - passed}")
     print(f"ALL {total} PYTHON CHECKS PASSED!\n")
 
