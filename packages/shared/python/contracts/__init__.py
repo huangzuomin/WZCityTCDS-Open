@@ -37,6 +37,11 @@ from .hub_entity_adapter import (
     IHubEntityTransport,
     assert_valid_entity_id,
 )
+from .fact_revision_storage import (
+    FactRevisionStorage,
+    compute_revision_digest,
+    compute_snapshot_digest,
+)
 
 __all__ = [
     "EntityCategory",
@@ -65,4 +70,7 @@ __all__ = [
     "MockHubEntityTransport",
     "IHubEntityTransport",
     "assert_valid_entity_id",
+    "FactRevisionStorage",
+    "compute_revision_digest",
+    "compute_snapshot_digest",
 ]
