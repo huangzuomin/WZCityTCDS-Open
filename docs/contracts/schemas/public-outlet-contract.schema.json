@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wzcitytcds.open/schemas/public-outlet-contract.schema.json",
+  "title": "Public Outlet Multi-Channel Delivery Contract",
+  "description": "Standard schema governing the representation and delivery of published facts across public Web archives, REST APIs, JSON-LD, RSS/Atom Feeds, Sitemaps, and LLM MCP endpoints.",
+  "type": "object",
+  "required": [
+    "outlet_channel",
+    "publication_id",
+    "snapshot_revision_id",
+    "entity_id",
+    "published_at",
+    "snapshot_digest_sha256",
+    "payload_format",
+    "delivery_status"
+  ],
+  "properties": {
+    "outlet_channel": {
+      "type": "string",
+      "enum": [
+        "PUBLIC_HTML_ARCHIVE",
+        "REST_API_V1",
+        "JSON_LD_CARD",
+        "FEED_ATOM_V1",
+        "XML_SITEMAP",
+        "CHANGES_STREAM_NDJSON",
+        "LLM_MCP_ENDPOINT"
+      ],
+      "description": "Public or machine consumption channel identifier."
+    },
+    "publication_id": {
+      "type": "string",
+      "pattern": "^pub_[a-zA-Z0-9_-]{12,64}$"
+    },
+    "snapshot_revision_id": {
+      "type": "string",
+      "pattern": "^pubrev_[a-zA-Z0-9_-]{12,64}$"
+    },
+    "entity_id": {
+      "type": "string",
+      "pattern": "^ent_[a-z0-9_-]{8,64}$"
+    },
+    "canonical_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "snapshot_digest_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "payload_format": {
+      "type": "string",
+      "enum": ["HTML", "JSON", "JSON_LD", "XML_ATOM", "XML_SITEMAP", "NDJSON"]
+    },
+    "delivery_status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE_CURRENT",
+        "SUPERSEDED_HISTORICAL",
+        "REVOKED_TOMBSTONE"
+      ],
+      "description": "Lifecycle state of the published payload on the outlet channel."
+    },
+    "tombstone_details": {
+      "type": "object",
+      "properties": {
+        "revoked_at": { "type": "string", "format": "date-time" },
+        "revocation_notice": { "type": "string", "maxLength": 1024 },
+        "http_status_code": { "type": "integer", "enum": [410, 404] }
+      },
+      "additionalProperties": false
+    },
+    "cache_control": {
+      "type": "object",
+      "required": ["cache_policy", "max_age_seconds"],
+      "properties": {
+        "cache_policy": {
+          "type": "string",
+          "enum": ["PUBLIC_IMMUTABLE", "PUBLIC_REVALIDATE", "NO_STORE"]
+        },
+        "max_age_seconds": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

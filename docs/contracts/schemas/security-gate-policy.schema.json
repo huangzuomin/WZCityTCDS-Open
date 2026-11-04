@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wzcitytcds.open/schemas/security-gate-policy.schema.json",
+  "title": "Unified Publication Security Gate Policy Contract",
+  "description": "Standard schema for release gate security policies, secret scanning, leakage prevention, and fail-closed validation rules prior to public export.",
+  "type": "object",
+  "required": [
+    "gate_evaluation_id",
+    "snapshot_revision_id",
+    "evaluated_at",
+    "gate_verdict",
+    "rule_evaluations"
+  ],
+  "properties": {
+    "gate_evaluation_id": {
+      "type": "string",
+      "pattern": "^gate_[a-zA-Z0-9_-]{12,64}$"
+    },
+    "snapshot_revision_id": {
+      "type": "string",
+      "pattern": "^pubrev_[a-zA-Z0-9_-]{12,64}$"
+    },
+    "evaluated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "gate_verdict": {
+      "type": "string",
+      "enum": ["PASS_APPROVED_FOR_RELEASE", "FAIL_CLOSED_BLOCKED"]
+    },
+    "rule_evaluations": {
+      "type": "object",
+      "required": [
+        "rule_only_published_state",
+        "rule_evidence_receipt_pass",
+        "rule_no_private_ip_leaks",
+        "rule_no_credential_patterns",
+        "rule_source_validity_confirmed"
+      ],
+      "properties": {
+        "rule_only_published_state": {
+          "type": "object",
+          "required": ["passed", "non_published_count"],
+          "properties": {
+            "passed": { "type": "boolean" },
+            "non_published_count": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "rule_evidence_receipt_pass": {
+          "type": "object",
+          "required": ["passed", "unverified_assertion_count"],
+          "properties": {
+            "passed": { "type": "boolean" },
+            "unverified_assertion_count": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "rule_no_private_ip_leaks": {
+          "type": "object",
+          "required": ["passed", "detected_matches"],
+          "properties": {
+            "passed": { "type": "boolean" },
+            "detected_matches": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "rule_no_credential_patterns": {
+          "type": "object",
+          "required": ["passed", "suspicious_token_count"],
+          "properties": {
+            "passed": { "type": "boolean" },
+            "suspicious_token_count": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "rule_source_validity_confirmed": {
+          "type": "object",
+          "required": ["passed", "retracted_source_count"],
+          "properties": {
+            "passed": { "type": "boolean" },
+            "retracted_source_count": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "gate_controller": {
+      "type": "object",
+      "required": ["controller_role", "signature_hash"],
+      "properties": {
+        "controller_role": {
+          "type": "string",
+          "enum": ["FPF_PUBLICATION_SECURITY_GATE", "SECURITY_OFFICER"]
+        },
+        "signature_hash": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
