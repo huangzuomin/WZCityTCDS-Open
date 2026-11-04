@@ -1,7 +1,7 @@
 # WZCityTCDS 项目唯一事实地图（正式版）
 
 > **状态：`FORMAL_PROJECT_MAP_ACTIVE`**  
-> **当前控制器基线：`4774bd7a56a0cc372d800026bc5240c239b0dad1`**  
+> **当前控制器基线：`f403e2be78c7bfc774c91b052643fe8fdc2925eb`**  
 > **主干仓库：`huangzuomin/WZCityTCDS-Open`（分支：`main`）**  
 > **治理规约：FPF 0.3 / 五权分立受控开发体系**
 
@@ -37,12 +37,12 @@
 
 当前已圆满完成 Phase 1 全套数据契约与 Phase 2 全部五个核心能力切片（C1 运行时模型校验器、C2 实体适配器、C3 修订存储与状态机、C4 证据验签与冲突仲裁、C5 公共分发出口与发布安全门禁）。**Phase 2 MVP 核心契约与引擎代码全部闭环**！后续进入 **Phase 3：独立服务运行时与端点接入阶段**。
 
-### 1.3 Phase 3：独立服务运行时与端点接入阶段（PLANNED）
+### 1.3 Phase 3：独立服务运行时与端点接入阶段（ACTIVE）
 
 | 切片编号 | 模块 / 目标 | 负责人 | DEV 状态 | 独立 QA 裁决 | 主干合并状态 | 部署状态 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **R1** | 事实发布独立 HTTP 服务与公共出口路由 (`apps/api/` / Outlets Routes) | DEV Lead | PLANNED | NOT_RUN | NOT_STARTED | NOT_STARTED |
-| **R2** | 审校工作台与采编接入 API (`apps/admin/` / Review Endpoints) | DEV Lead | PLANNED | NOT_RUN | NOT_STARTED | NOT_STARTED |
+| **R1** | 事实发布独立 HTTP 服务与公共出口路由 (`apps/api/` / Outlets Routes) (#24) | DEV Lead | COMPLETED | PASS | MERGED (f403e2be) | N/A |
+| **R2** | 审校工作台与采编接入 API (`apps/admin/` / Review Endpoints) | DEV Lead | ACTIVE | NOT_RUN | NOT_STARTED | NOT_STARTED |
 | **R3** | 城市时空可信内容枢纽单向投影同步端与变更流消费端 | DEV Lead | PLANNED | NOT_RUN | NOT_STARTED | NOT_STARTED |
 | **R4** | 端到端集成冒烟测试与生产部署验收门禁 | DEV + QA | PLANNED | NOT_RUN | NOT_STARTED | NOT_STARTED |
 
@@ -52,7 +52,7 @@
 
 - **正式主干控制器仓库**：`huangzuomin/WZCityTCDS-Open`
 - **主干分支**：`main`
-- **当前控制器不可变 SHA**：`4774bd7a56a0cc372d800026bc5240c239b0dad1`
+- **当前控制器不可变 SHA**：`f403e2be78c7bfc774c91b052643fe8fdc2925eb`
 - **GitHub 分支保护**：已配置必需状态检查与独立 App 审查要求
 - **独立审查身份**：`fpf-qa-bot-huangzuomin[bot]`（GitHub App ID: 5464827）
 - **本地工位布局**：`_fpf-workspaces/WZCITYTCDS_MVP/`（`bootstrap`、`dev`、`qa` 物理隔离工作树）
@@ -146,4 +146,6 @@
   - PR #20 (`kind: DEV_HANDOFF`，commit: `fe690932`，C4 证据验签与冲突仲裁)
   - PR #21 (`kind: MAP_UPDATE`，commit: `f0089f39`)
   - PR #22 (`kind: DEV_HANDOFF`，commit: `4774bd7a`，C5 公共分发端与安全网关)
-- **当前执行里程碑**：Phase 2 MVP 核心代码已全部闭环，进入 Phase 3 独立服务运行时规划。
+  - PR #23 (`kind: MAP_UPDATE`，commit: `46e12dae`，Phase 2 MVP 全量闭环与 Phase 3 规划)
+  - PR #24 (`kind: DEV_HANDOFF`，commit: `f403e2be`，R1 事实发布独立 HTTP 服务与公共出口路由)
+- **当前执行里程碑**：Phase 3 切片 R1 已顺利完成交付并合入主干，当前活跃推进 **R2 审校工作台与采编接入 API** 切片。
