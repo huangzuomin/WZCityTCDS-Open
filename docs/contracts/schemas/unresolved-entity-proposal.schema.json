@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wzcitytcds.open/schemas/unresolved-entity-proposal.schema.json",
+  "title": "Unresolved Entity Proposal Contract",
+  "description": "Standard schema for proposing new entity candidate governance to the City Spatial-Temporal Trusted Content Hub without creating local parallel entity master data.",
+  "type": "object",
+  "required": [
+    "proposal_id",
+    "proposer_system",
+    "submitted_at",
+    "candidate_name",
+    "source_evidence",
+    "proposal_status"
+  ],
+  "properties": {
+    "proposal_id": {
+      "type": "string",
+      "pattern": "^prop_[a-zA-Z0-9_-]{12,64}$"
+    },
+    "proposer_system": {
+      "type": "string",
+      "enum": ["WZCityTCDS", "WZCityTCDS-ExtractionEngine"]
+    },
+    "submitted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "candidate_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "suggested_aliases": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "suggested_category": {
+      "type": "string",
+      "enum": [
+        "POI",
+        "ADMIN_DIVISION",
+        "ORGANIZATION",
+        "PERSON",
+        "EVENT",
+        "GEO_FEATURE",
+        "NATURAL_RESOURCE"
+      ]
+    },
+    "source_evidence": {
+      "type": "object",
+      "required": ["source_doc_id", "context_snippet", "evidence_span_hash"],
+      "properties": {
+        "source_doc_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "context_snippet": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "evidence_span_hash": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "proposal_status": {
+      "type": "string",
+      "enum": [
+        "SUBMITTED",
+        "IN_HUB_REVIEW",
+        "ACCEPTED_ALLOCATED",
+        "MERGED_AS_ALIAS",
+        "REJECTED"
+      ]
+    },
+    "hub_adjudication": {
+      "type": "object",
+      "properties": {
+        "adjudicated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "allocated_entity_id": {
+          "type": "string",
+          "pattern": "^ent_[a-z0-9_-]{8,64}$"
+        },
+        "canonical_name": {
+          "type": "string"
+        },
+        "resolution_notes": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
