@@ -279,7 +279,15 @@ def run_tests():
     total += res_evid.testsRun
     passed += res_evid.testsRun
 
-    print(f"\n=== Python Pydantic, Entity Adapter, Revision Storage & Evidence Engine Test Suite Results ===")
+    # 16. Outlets & Publication Security Gate Tests
+    from packages.shared.python.contracts.test_outlets_engine import TestOutletsEngine
+    suite_out = unittest.TestLoader().loadTestsFromTestCase(TestOutletsEngine)
+    res_out = runner.run(suite_out)
+    assert res_out.wasSuccessful(), f"OutletsEngine tests failed: {len(res_out.errors)} errors, {len(res_out.failures)} failures"
+    total += res_out.testsRun
+    passed += res_out.testsRun
+
+    print(f"\n=== Python Pydantic, Entity Adapter, Revision Storage & Evidence Engine & Outlets Gate Test Suite Results ===")
     print(f"Total: {total}, Passed: {passed}, Failed: {total - passed}")
     print(f"ALL {total} PYTHON CHECKS PASSED!\n")
 
