@@ -12,12 +12,14 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "tsc -p tsconfig.json --watch",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test": "node dist/contracts/verify.spec.js && node dist/adapters/hub-entity.spec.js && node dist/revision/revision-storage.spec.js",
+    "test": "node dist/contracts/verify.spec.js && node dist/adapters/hub-entity.spec.js && node dist/revision/revision-storage.spec.js && node dist/evidence/evidence.spec.js",
     "clean": "rimraf dist"
   },
   "dependencies": {

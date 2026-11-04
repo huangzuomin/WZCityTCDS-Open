@@ -42,6 +42,13 @@ from .fact_revision_storage import (
     compute_revision_digest,
     compute_snapshot_digest,
 )
+from .evidence_engine import (
+    EvidenceVerificationEngine,
+    ConflictArbitrationPipeline,
+    SourceNewsDocumentSnapshot,
+    compute_span_hash,
+    compute_receipt_digest,
+)
 
 __all__ = [
     "EntityCategory",
@@ -73,4 +80,9 @@ __all__ = [
     "FactRevisionStorage",
     "compute_revision_digest",
     "compute_snapshot_digest",
+    "EvidenceVerificationEngine",
+    "ConflictArbitrationPipeline",
+    "SourceNewsDocumentSnapshot",
+    "compute_span_hash",
+    "compute_receipt_digest",
 ]
