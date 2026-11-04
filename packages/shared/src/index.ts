@@ -7,3 +7,4 @@ export * from './metric-keys.js';
 export * from './stat-enrich.js';
 export * from './contracts/index.js';
 export * from './adapters/index.js';
+export * from './revision/index.js';

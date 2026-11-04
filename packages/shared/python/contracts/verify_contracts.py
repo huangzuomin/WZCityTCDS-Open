@@ -263,7 +263,14 @@ def run_tests():
     total += res.testsRun
     passed += res.testsRun
 
-    print(f"\n=== Python Pydantic & Hub Entity Adapter Test Suite Results ===")
+    # 14. Fact Revision Storage Python Unit Tests
+    from packages.shared.python.contracts.test_revision_storage import TestFactRevisionStorage
+    suite_rev = unittest.TestLoader().loadTestsFromTestCase(TestFactRevisionStorage)
+    res_rev = runner.run(suite_rev)
+    assert res_rev.wasSuccessful(), f'FactRevisionStorage tests failed'
+    total += res_rev.testsRun
+    passed += res_rev.testsRun
+    print(f'\n=== Python Pydantic, Entity Adapter & Revision Storage Test Suite Results ===')
     print(f"Total: {total}, Passed: {passed}, Failed: {total - passed}")
     print(f"ALL {total} PYTHON CHECKS PASSED!\n")
 
