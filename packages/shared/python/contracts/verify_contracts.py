@@ -287,7 +287,15 @@ def run_tests():
     total += res_out.testsRun
     passed += res_out.testsRun
 
-    print(f"\n=== Python Pydantic, Entity Adapter, Revision Storage & Evidence Engine & Outlets Gate Test Suite Results ===")
+    # 17. Outlets HTTP Router Tests
+    from packages.shared.python.contracts.test_outlets_http import TestOutletsHttpRouter
+    suite_http = unittest.TestLoader().loadTestsFromTestCase(TestOutletsHttpRouter)
+    res_http = runner.run(suite_http)
+    assert res_http.wasSuccessful(), f"OutletsHttpRouter tests failed: {len(res_http.errors)} errors, {len(res_http.failures)} failures"
+    total += res_http.testsRun
+    passed += res_http.testsRun
+
+    print(f"\n=== Python Pydantic, Entity Adapter, Revision Storage & Evidence Engine & Outlets Gate & HTTP Router Test Suite Results ===")
     print(f"Total: {total}, Passed: {passed}, Failed: {total - passed}")
     print(f"ALL {total} PYTHON CHECKS PASSED!\n")
 
