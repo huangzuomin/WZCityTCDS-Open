@@ -1,7 +1,7 @@
 # WZCityTCDS 项目唯一事实地图（正式版）
 
 > **状态：`FORMAL_PROJECT_MAP_ACTIVE`**  
-> **当前控制器基线：`66d9a74e4463f97a37a54dfad73842d81cd39ad2`**  
+> **当前控制器基线：`fe690932d70aecd68054dffcef2966ff153a9f37`**  
 > **主干仓库：`huangzuomin/WZCityTCDS-Open`（分支：`main`）**  
 > **治理规约：FPF 0.3 / 五权分立受控开发体系**
 
@@ -32,10 +32,10 @@
 | **C1** | 契约强类型与运行时模型校验器 (TypeScript/Python) (#14) | DEV Lead | COMPLETED | PASS | MERGED (b98b982b) | N/A |
 | **C2** | 实体主数据适配器与解析客户端实现 (#16) | DEV Lead | COMPLETED | PASS | MERGED (20cf81b4) | N/A |
 | **C3** | Append-Only 版本链存储与发布签发状态机实现 (#18) | DEV Lead | COMPLETED | PASS | MERGED (66d9a74e) | N/A |
-| **C4** | EvidenceSpan 哈希验签引擎与仲裁管道实现 | DEV Lead | READY_FOR_DEV | NOT_RUN | NOT_STARTED | NOT_STARTED |
-| **C5** | 机器出口 (API/Feed/Changes/MCP) 与安全门禁拦截实现 | DEV Lead | PLANNED | NOT_RUN | NOT_STARTED | NOT_STARTED |
+| **C4** | EvidenceSpan 哈希验签引擎与仲裁管道实现 (#20) | DEV Lead | COMPLETED | PASS | MERGED (fe690932) | N/A |
+| **C5** | 机器出口 (API/Feed/Changes/MCP) 与安全门禁拦截实现 | DEV Lead | READY_FOR_DEV | NOT_RUN | NOT_STARTED | NOT_STARTED |
 
-当前已圆满完成 Phase 1 全套数据契约与 Phase 2 C1、C2、C3（Append-Only 版本链存储与发布签发状态机）。后续开发正式进入 **Phase 2 核心代码实现：C4 切片（EvidenceSpan 哈希验签引擎与仲裁管道实现）**。
+当前已圆满完成 Phase 1 全套数据契约与 Phase 2 C1、C2、C3、C4（EvidenceSpan 哈希验签引擎与仲裁管道）。后续开发正式进入 **Phase 2 核心代码实现：C5 切片（机器出口 API/Feed/Changes/MCP 与统一发布安全门禁实现）**。
 
 ---
 
@@ -43,7 +43,7 @@
 
 - **正式主干控制器仓库**：`huangzuomin/WZCityTCDS-Open`
 - **主干分支**：`main`
-- **当前控制器不可变 SHA**：`66d9a74e4463f97a37a54dfad73842d81cd39ad2`
+- **当前控制器不可变 SHA**：`fe690932d70aecd68054dffcef2966ff153a9f37`
 - **GitHub 分支保护**：已配置必需状态检查与独立 App 审查要求
 - **独立审查身份**：`fpf-qa-bot-huangzuomin[bot]`（GitHub App ID: 5464827）
 - **本地工位布局**：`_fpf-workspaces/WZCITYTCDS_MVP/`（`bootstrap`、`dev`、`qa` 物理隔离工作树）
