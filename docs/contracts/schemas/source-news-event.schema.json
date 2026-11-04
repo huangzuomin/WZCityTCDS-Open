@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wzcitytcds.open/schemas/source-news-event.schema.json",
+  "title": "Upstream Source News Event Contract",
+  "description": "Standard schema for news publication, modification, and retraction events received from upstream CMS authorities.",
+  "type": "object",
+  "required": [
+    "event_id",
+    "event_type",
+    "event_time",
+    "source_doc_id",
+    "cms_origin"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^evt_[a-zA-Z0-9_-]{12,64}$"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": ["NEWS_PUBLISHED", "NEWS_UPDATED", "NEWS_RETRACTED"]
+    },
+    "event_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_doc_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "cms_origin": {
+      "type": "object",
+      "required": ["publisher_name", "channel_id"],
+      "properties": {
+        "publisher_name": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "channel_id": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "author": { "type": "string", "maxLength": 128 },
+        "editor": { "type": "string", "maxLength": 128 }
+      },
+      "additionalProperties": false
+    },
+    "news_payload": {
+      "type": "object",
+      "required": ["title", "publish_time", "content_text", "paragraphs", "content_sha256"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1, "maxLength": 512 },
+        "url": { "type": "string", "format": "uri" },
+        "publish_time": { "type": "string", "format": "date-time" },
+        "content_text": { "type": "string", "minLength": 1 },
+        "content_sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+        "paragraphs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["paragraph_index", "text", "paragraph_sha256"],
+            "properties": {
+              "paragraph_index": { "type": "integer", "minimum": 0 },
+              "char_start": { "type": "integer", "minimum": 0 },
+              "char_end": { "type": "integer", "minimum": 0 },
+              "text": { "type": "string" },
+              "paragraph_sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "copyright_notice": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "retraction_payload": {
+      "type": "object",
+      "required": ["retraction_time", "retraction_reason"],
+      "properties": {
+        "retraction_time": { "type": "string", "format": "date-time" },
+        "retraction_reason": { "type": "string", "minLength": 1, "maxLength": 1024 },
+        "replaced_by_doc_id": { "type": "string", "maxLength": 128 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
