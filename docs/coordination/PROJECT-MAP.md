@@ -1,7 +1,7 @@
 # WZCityTCDS 项目唯一事实地图（正式版）
 
 > **状态：`FORMAL_PROJECT_MAP_ACTIVE`**  
-> **当前控制器基线：`fe690932d70aecd68054dffcef2966ff153a9f37`**  
+> **当前控制器基线：`4774bd7a56a0cc372d800026bc5240c239b0dad1`**  
 > **主干仓库：`huangzuomin/WZCityTCDS-Open`（分支：`main`）**  
 > **治理规约：FPF 0.3 / 五权分立受控开发体系**
 
@@ -25,7 +25,7 @@
 | **S4** | EvidenceSpan 证据溯源与哈希验签引擎 (#9) | DEV Lead | COMPLETED | PASS | MERGED (21f39aa9) | N/A |
 | **S5** | 机器出口与统一发布安全门禁 (#11) | DEV Lead | COMPLETED | PASS | MERGED (6a1feba7) | N/A |
 
-### 1.2 Phase 2：契约驱动工程实现阶段（ACTIVE）
+### 1.2 Phase 2：契约驱动工程实现阶段（COMPLETED）
 
 | 切片编号 | 模块 / 目标 | 负责人 | DEV 状态 | 独立 QA 裁决 | 主干合并状态 | 部署状态 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -33,9 +33,18 @@
 | **C2** | 实体主数据适配器与解析客户端实现 (#16) | DEV Lead | COMPLETED | PASS | MERGED (20cf81b4) | N/A |
 | **C3** | Append-Only 版本链存储与发布签发状态机实现 (#18) | DEV Lead | COMPLETED | PASS | MERGED (66d9a74e) | N/A |
 | **C4** | EvidenceSpan 哈希验签引擎与仲裁管道实现 (#20) | DEV Lead | COMPLETED | PASS | MERGED (fe690932) | N/A |
-| **C5** | 机器出口 (API/Feed/Changes/MCP) 与安全门禁拦截实现 | DEV Lead | READY_FOR_DEV | NOT_RUN | NOT_STARTED | NOT_STARTED |
+| **C5** | 机器出口 (API/Feed/Changes/MCP) 与安全门禁拦截实现 (#22) | DEV Lead | COMPLETED | PASS | MERGED (4774bd7a) | N/A |
 
-当前已圆满完成 Phase 1 全套数据契约与 Phase 2 C1、C2、C3、C4（EvidenceSpan 哈希验签引擎与仲裁管道）。后续开发正式进入 **Phase 2 核心代码实现：C5 切片（机器出口 API/Feed/Changes/MCP 与统一发布安全门禁实现）**。
+当前已圆满完成 Phase 1 全套数据契约与 Phase 2 全部五个核心能力切片（C1 运行时模型校验器、C2 实体适配器、C3 修订存储与状态机、C4 证据验签与冲突仲裁、C5 公共分发出口与发布安全门禁）。**Phase 2 MVP 核心契约与引擎代码全部闭环**！后续进入 **Phase 3：独立服务运行时与端点接入阶段**。
+
+### 1.3 Phase 3：独立服务运行时与端点接入阶段（PLANNED）
+
+| 切片编号 | 模块 / 目标 | 负责人 | DEV 状态 | 独立 QA 裁决 | 主干合并状态 | 部署状态 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **R1** | 事实发布独立 HTTP 服务与公共出口路由 (`apps/api/` / Outlets Routes) | DEV Lead | PLANNED | NOT_RUN | NOT_STARTED | NOT_STARTED |
+| **R2** | 审校工作台与采编接入 API (`apps/admin/` / Review Endpoints) | DEV Lead | PLANNED | NOT_RUN | NOT_STARTED | NOT_STARTED |
+| **R3** | 城市时空可信内容枢纽单向投影同步端与变更流消费端 | DEV Lead | PLANNED | NOT_RUN | NOT_STARTED | NOT_STARTED |
+| **R4** | 端到端集成冒烟测试与生产部署验收门禁 | DEV + QA | PLANNED | NOT_RUN | NOT_STARTED | NOT_STARTED |
 
 ---
 
@@ -43,7 +52,7 @@
 
 - **正式主干控制器仓库**：`huangzuomin/WZCityTCDS-Open`
 - **主干分支**：`main`
-- **当前控制器不可变 SHA**：`fe690932d70aecd68054dffcef2966ff153a9f37`
+- **当前控制器不可变 SHA**：`4774bd7a56a0cc372d800026bc5240c239b0dad1`
 - **GitHub 分支保护**：已配置必需状态检查与独立 App 审查要求
 - **独立审查身份**：`fpf-qa-bot-huangzuomin[bot]`（GitHub App ID: 5464827）
 - **本地工位布局**：`_fpf-workspaces/WZCITYTCDS_MVP/`（`bootstrap`、`dev`、`qa` 物理隔离工作树）
@@ -126,4 +135,15 @@
   - PR #9 (`kind: POLICY_CHANGE`，commit: `21f39aa9`)
   - PR #10 (`kind: MAP_UPDATE`，commit: `6c14119e`)
   - PR #11 (`kind: POLICY_CHANGE`，commit: `6a1feba7`)
-- **当前执行切片**：C1（契约强类型与运行时模型校验器）。
+  - PR #12 (`kind: MAP_UPDATE`，commit: `6b8805f4`)
+  - PR #13 (`kind: SCOPE_CLARIFICATION`，commit: `816174a7`)
+  - PR #14 (`kind: DEV_HANDOFF`，commit: `b98b982b`，C1 契约强类型与校验器)
+  - PR #15 (`kind: MAP_UPDATE`，commit: `2f7a95b8`)
+  - PR #16 (`kind: DEV_HANDOFF`，commit: `20cf81b4`，C2 实体主数据适配器)
+  - PR #17 (`kind: MAP_UPDATE`，commit: `bfb53f68`)
+  - PR #18 (`kind: DEV_HANDOFF`，commit: `66d9a74e`，C3 版本链存储与签发状态机)
+  - PR #19 (`kind: MAP_UPDATE`，commit: `6082ee4c`)
+  - PR #20 (`kind: DEV_HANDOFF`，commit: `fe690932`，C4 证据验签与冲突仲裁)
+  - PR #21 (`kind: MAP_UPDATE`，commit: `f0089f39`)
+  - PR #22 (`kind: DEV_HANDOFF`，commit: `4774bd7a`，C5 公共分发端与安全网关)
+- **当前执行里程碑**：Phase 2 MVP 核心代码已全部闭环，进入 Phase 3 独立服务运行时规划。
