@@ -29,6 +29,7 @@ export const EntityLookupRequestSchema = z
   })
   .strict();
 export type EntityLookupRequest = z.infer<typeof EntityLookupRequestSchema>;
+export type EntityLookupRequestInput = z.input<typeof EntityLookupRequestSchema>;
 
 export const SpatialCoordinatesSchema = z
   .object({

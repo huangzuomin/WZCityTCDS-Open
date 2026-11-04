@@ -6,9 +6,12 @@ export * from './outlets.js';
 
 import { z } from 'zod';
 
-export function validateContract<T>(schema: z.ZodType<T>, data: unknown): {
+export function validateContract<Output, Def extends z.ZodTypeDef = z.ZodTypeDef, Input = Output>(
+  schema: z.ZodType<Output, Def, Input>,
+  data: unknown
+): {
   success: boolean;
-  data?: T;
+  data?: Output;
   errors?: z.ZodIssue[];
 } {
   const result = schema.safeParse(data);
@@ -18,7 +21,11 @@ export function validateContract<T>(schema: z.ZodType<T>, data: unknown): {
   return { success: false, errors: result.error.issues };
 }
 
-export function assertContract<T>(schema: z.ZodType<T>, data: unknown, contextName = 'Contract'): T {
+export function assertContract<Output, Def extends z.ZodTypeDef = z.ZodTypeDef, Input = Output>(
+  schema: z.ZodType<Output, Def, Input>,
+  data: unknown,
+  contextName = 'Contract'
+): Output {
   const result = schema.safeParse(data);
   if (!result.success) {
     const errorDetails = result.error.issues

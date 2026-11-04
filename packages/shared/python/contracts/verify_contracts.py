@@ -253,9 +253,19 @@ def run_tests():
     assert chg.change_type.value == "FACT_PUBLISHED"
     passed += 1
 
-    print(f"\n=== Python Pydantic Contract Test Suite Results ===")
+    # 13. Hub Entity Adapter Python Unit Tests
+    import unittest
+    from packages.shared.python.contracts.test_hub_entity_adapter import TestHubEntityAdapter
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestHubEntityAdapter)
+    runner = unittest.TextTestRunner(verbosity=1)
+    res = runner.run(suite)
+    assert res.wasSuccessful(), f"HubEntityAdapter tests failed: {len(res.errors)} errors, {len(res.failures)} failures"
+    total += res.testsRun
+    passed += res.testsRun
+
+    print(f"\n=== Python Pydantic & Hub Entity Adapter Test Suite Results ===")
     print(f"Total: {total}, Passed: {passed}, Failed: {total - passed}")
-    print("ALL 12 PYTHON PYDANTIC CONTRACT MODELS PASSED!\n")
+    print(f"ALL {total} PYTHON CHECKS PASSED!\n")
 
 
 if __name__ == "__main__":
