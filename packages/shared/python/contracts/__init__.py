@@ -49,6 +49,12 @@ from .evidence_engine import (
     compute_span_hash,
     compute_receipt_digest,
 )
+from .outlets_engine import (
+    PublicationSecurityGate,
+    OutletDeliveryProjector,
+    ChangesStreamManager,
+    compute_stream_event_digest,
+)
 
 __all__ = [
     "EntityCategory",
@@ -85,4 +91,8 @@ __all__ = [
     "SourceNewsDocumentSnapshot",
     "compute_span_hash",
     "compute_receipt_digest",
+    "PublicationSecurityGate",
+    "OutletDeliveryProjector",
+    "ChangesStreamManager",
+    "compute_stream_event_digest",
 ]

@@ -34,7 +34,7 @@ class TombstoneDetails(BaseModel):
     model_config = ConfigDict(extra="forbid")
     revoked_at: Optional[str] = None
     revocation_notice: Optional[str] = Field(None, max_length=1024)
-    http_status_code: Optional[int] = Field(None, pattern=r"^(410|404)$")
+    http_status_code: Optional[int] = None
 
 
 class CacheControlPolicy(BaseModel):
