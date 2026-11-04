@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wzcitytcds.open/schemas/fact-revision-lifecycle.schema.json",
+  "title": "Fact Revision and Assertion Lifecycle Contract",
+  "description": "Standard schema for immutable append-only fact assertions, revisions, and lifecycle state management in WZCityTCDS.",
+  "type": "object",
+  "required": [
+    "assertion_id",
+    "revision_id",
+    "entity_id",
+    "property_path",
+    "assertion_value",
+    "lifecycle_state",
+    "revision_metadata"
+  ],
+  "properties": {
+    "assertion_id": {
+      "type": "string",
+      "pattern": "^ast_[a-zA-Z0-9_-]{12,64}$",
+      "description": "Stable logical root identifier for this factual assertion."
+    },
+    "revision_id": {
+      "type": "string",
+      "pattern": "^rev_[a-zA-Z0-9_-]{12,64}$",
+      "description": "Unique identifier for this specific immutable revision in the append-only version chain."
+    },
+    "revision_number": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Monotonically increasing 1-based revision sequence number."
+    },
+    "entity_id": {
+      "type": "string",
+      "pattern": "^ent_[a-z0-9_-]{8,64}$",
+      "description": "Canonical entity identifier strictly aligned with Hub master data."
+    },
+    "property_path": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Dot-separated hierarchical property identifier, e.g., economic.gdp.annual."
+    },
+    "assertion_value": {
+      "type": "object",
+      "required": ["raw_value", "data_type"],
+      "properties": {
+        "raw_value": {
+          "type": ["string", "number", "boolean", "object", "array"]
+        },
+        "data_type": {
+          "type": "string",
+          "enum": ["STRING", "NUMBER", "BOOLEAN", "QUANTITY", "TEMPORAL_RANGE", "GEO_SHAPE"]
+        },
+        "unit": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "temporal_validity": {
+          "type": "object",
+          "properties": {
+            "valid_from": { "type": "string", "format": "date-time" },
+            "valid_to": { "type": "string", "format": "date-time" },
+            "statistical_period": { "type": "string", "maxLength": 64 }
+          },
+          "additionalProperties": false
+        },
+        "spatial_scope": {
+          "type": "object",
+          "properties": {
+            "region_code": { "type": "string", "pattern": "^[0-9]{6}$" },
+            "region_name": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "lifecycle_state": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "PENDING_REVIEW",
+        "PUBLISHED",
+        "SUPERSEDED",
+        "REVOKED"
+      ]
+    },
+    "revision_metadata": {
+      "type": "object",
+      "required": [
+        "parent_revision_sha256",
+        "created_at",
+        "created_by_role",
+        "revision_reason",
+        "evidence_span_hashes"
+      ],
+      "properties": {
+        "parent_revision_sha256": {
+          "type": "string",
+          "pattern": "^([a-fA-F0-9]{64}|GENESIS)$",
+          "description": "SHA-256 hash of previous revision, or GENESIS for initial revision."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "created_by_role": {
+          "type": "string",
+          "enum": ["FACT_EXTRACTOR", "FACT_REVIEWER", "FACT_ARBITRATOR", "SYSTEM_MIGRATION"]
+        },
+        "author_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "revision_reason": {
+          "type": "string",
+          "enum": [
+            "INITIAL_PUBLISH",
+            "STATISTICAL_UPDATE",
+            "ERRATUM_CORRECTION",
+            "SOURCE_EXPANSION",
+            "SOURCE_RETRACTION_ADJUSTMENT"
+          ]
+        },
+        "reason_description": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "evidence_span_hashes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          },
+          "minItems": 1,
+          "description": "Cryptographic references to supporting EvidenceSpans."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

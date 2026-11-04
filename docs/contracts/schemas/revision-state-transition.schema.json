@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wzcitytcds.open/schemas/revision-state-transition.schema.json",
+  "title": "Fact Revision State Transition Contract",
+  "description": "Validation schema governing permissible state machine transitions for fact revisions and publication snapshots.",
+  "type": "object",
+  "required": [
+    "transition_id",
+    "assertion_id",
+    "revision_id",
+    "from_state",
+    "to_state",
+    "transition_trigger",
+    "authorized_role",
+    "transition_timestamp"
+  ],
+  "properties": {
+    "transition_id": {
+      "type": "string",
+      "pattern": "^trans_[a-zA-Z0-9_-]{12,64}$"
+    },
+    "assertion_id": {
+      "type": "string",
+      "pattern": "^ast_[a-zA-Z0-9_-]{12,64}$"
+    },
+    "revision_id": {
+      "type": "string",
+      "pattern": "^rev_[a-zA-Z0-9_-]{12,64}$"
+    },
+    "from_state": {
+      "type": "string",
+      "enum": ["DRAFT", "PENDING_REVIEW", "PUBLISHED"]
+    },
+    "to_state": {
+      "type": "string",
+      "enum": ["PENDING_REVIEW", "PUBLISHED", "SUPERSEDED", "REVOKED", "REJECTED"]
+    },
+    "transition_trigger": {
+      "type": "string",
+      "enum": [
+        "SUBMIT_FOR_REVIEW",
+        "APPROVE_AND_PUBLISH",
+        "SUPERSEDE_WITH_NEW_REVISION",
+        "REVOKE_PUBLISHED_FACT",
+        "REJECT_CANDIDATE"
+      ]
+    },
+    "authorized_role": {
+      "type": "string",
+      "enum": ["FACT_EXTRACTOR", "FACT_REVIEWER", "FACT_ARBITRATOR", "CHIEF_EDITOR"]
+    },
+    "operator_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "transition_timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "superseded_by_revision_id": {
+      "type": "string",
+      "pattern": "^rev_[a-zA-Z0-9_-]{12,64}$",
+      "description": "Required when to_state is SUPERSEDED."
+    },
+    "revocation_reason": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 1024,
+      "description": "Required when to_state is REVOKED."
+    }
+  },
+  "additionalProperties": false
+}
