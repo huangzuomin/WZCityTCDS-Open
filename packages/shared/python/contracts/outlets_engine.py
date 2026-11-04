@@ -274,7 +274,9 @@ class OutletDeliveryProjector:
             return json.dumps(snapshot.model_dump(), indent=2, ensure_ascii=False)
         elif channel == OutletChannel.PUBLIC_HTML_ARCHIVE:
             items = "".join(
-                f"<li><strong>{a['property_path']}</strong>: {a['raw_value']} (Rev: {a['revision_id']})</li>"
+                f"<li><strong>{getattr(a, 'property_path', a.get('property_path') if isinstance(a, dict) else '')}</strong>: "
+                f"{getattr(a, 'raw_value', a.get('raw_value') if isinstance(a, dict) else '')} "
+                f"(Rev: {getattr(a, 'revision_id', a.get('revision_id') if isinstance(a, dict) else '')})</li>"
                 for a in snapshot.published_assertions
             )
             return (
@@ -298,6 +300,24 @@ class OutletDeliveryProjector:
                     },
                 },
                 indent=2,
+            )
+        elif channel == OutletChannel.FEED_ATOM_V1:
+            return (
+                '<?xml version="1.0" encoding="utf-8"?>\n'
+                '<entry xmlns="http://www.w3.org/2005/Atom">\n'
+                f'  <id>urn:pubrev:{snapshot.snapshot_revision_id}</id>\n'
+                f'  <title>Fact Update: {snapshot.entity_id}</title>\n'
+                f'  <updated>{snapshot.generated_at}</updated>\n'
+                f'  <summary>{len(snapshot.published_assertions)} verified assertions.</summary>\n'
+                '</entry>'
+            )
+        elif channel == OutletChannel.XML_SITEMAP:
+            return (
+                '<url>\n'
+                f'  <loc>{self.default_base_url}/entities/{snapshot.entity_id}</loc>\n'
+                f'  <lastmod>{snapshot.generated_at.split("T")[0]}</lastmod>\n'
+                '  <changefreq>daily</changefreq>\n'
+                '</url>'
             )
         elif channel == OutletChannel.CHANGES_STREAM_NDJSON:
             return json.dumps(

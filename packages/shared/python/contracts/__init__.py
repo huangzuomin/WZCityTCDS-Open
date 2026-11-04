@@ -55,6 +55,13 @@ from .outlets_engine import (
     ChangesStreamManager,
     compute_stream_event_digest,
 )
+from .outlets_http import (
+    OutletsHttpRouter,
+    OutletsHttpRequest,
+    OutletsHttpResponse,
+    SnapshotRecord,
+    OutletsStore,
+)
 
 __all__ = [
     "EntityCategory",
@@ -95,4 +102,9 @@ __all__ = [
     "OutletDeliveryProjector",
     "ChangesStreamManager",
     "compute_stream_event_digest",
+    "OutletsHttpRouter",
+    "OutletsHttpRequest",
+    "OutletsHttpResponse",
+    "SnapshotRecord",
+    "OutletsStore",
 ]

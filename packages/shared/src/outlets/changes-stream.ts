@@ -6,6 +6,12 @@ import {
   ChangesStreamEventSchema,
 } from '../contracts/outlets.js';
 
+export {
+  type ChangesStreamEvent,
+  type StreamChangeType,
+  type AffectedRevision,
+};
+
 export interface EmitChangeEventParams {
   change_type: StreamChangeType;
   entity_id: string;
