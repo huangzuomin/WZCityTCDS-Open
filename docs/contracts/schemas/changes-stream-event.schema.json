@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wzcitytcds.open/schemas/changes-stream-event.schema.json",
+  "title": "Machine Changes Stream Event Contract",
+  "description": "Standard schema for append-only factual change feed events emitted to the Hub indexer, search crawlers, and LLM MCP consumers.",
+  "type": "object",
+  "required": [
+    "change_event_id",
+    "change_sequence_num",
+    "change_type",
+    "entity_id",
+    "event_timestamp",
+    "event_digest_sha256",
+    "affected_revision"
+  ],
+  "properties": {
+    "change_event_id": {
+      "type": "string",
+      "pattern": "^chg_[a-zA-Z0-9_-]{12,64}$"
+    },
+    "change_sequence_num": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Monotonically increasing sequence number for changelog replication."
+    },
+    "change_type": {
+      "type": "string",
+      "enum": [
+        "FACT_PUBLISHED",
+        "FACT_CORRECTED",
+        "FACT_REVOKED",
+        "SNAPSHOT_SEALED"
+      ]
+    },
+    "entity_id": {
+      "type": "string",
+      "pattern": "^ent_[a-z0-9_-]{8,64}$"
+    },
+    "event_timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "event_digest_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "affected_revision": {
+      "type": "object",
+      "required": ["revision_id", "property_path", "lifecycle_state"],
+      "properties": {
+        "revision_id": { "type": "string" },
+        "property_path": { "type": "string" },
+        "lifecycle_state": {
+          "type": "string",
+          "enum": ["PUBLISHED", "SUPERSEDED", "REVOKED"]
+        },
+        "previous_revision_id": { "type": "string" },
+        "publication_snapshot_id": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
