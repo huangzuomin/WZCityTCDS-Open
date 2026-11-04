@@ -1,7 +1,7 @@
 # WZCityTCDS 项目唯一事实地图（正式版）
 
 > **状态：`FORMAL_PROJECT_MAP_ACTIVE`**  
-> **当前控制器基线：`b98b982bc52e9c422449cc17b2ed2f04870251c3`**  
+> **当前控制器基线：`20cf81b427e5ede78336447616bba4b2879007aa`**  
 > **主干仓库：`huangzuomin/WZCityTCDS-Open`（分支：`main`）**  
 > **治理规约：FPF 0.3 / 五权分立受控开发体系**
 
@@ -30,12 +30,12 @@
 | 切片编号 | 模块 / 目标 | 负责人 | DEV 状态 | 独立 QA 裁决 | 主干合并状态 | 部署状态 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **C1** | 契约强类型与运行时模型校验器 (TypeScript/Python) (#14) | DEV Lead | COMPLETED | PASS | MERGED (b98b982b) | N/A |
-| **C2** | 实体主数据适配器与解析客户端实现 | DEV Lead | READY_FOR_DEV | NOT_RUN | NOT_STARTED | NOT_STARTED |
-| **C3** | Append-Only 版本链存储与发布签发状态机实现 | DEV Lead | PLANNED | NOT_RUN | NOT_STARTED | NOT_STARTED |
+| **C2** | 实体主数据适配器与解析客户端实现 (#16) | DEV Lead | COMPLETED | PASS | MERGED (20cf81b4) | N/A |
+| **C3** | Append-Only 版本链存储与发布签发状态机实现 | DEV Lead | READY_FOR_DEV | NOT_RUN | NOT_STARTED | NOT_STARTED |
 | **C4** | EvidenceSpan 哈希验签引擎与仲裁管道实现 | DEV Lead | PLANNED | NOT_RUN | NOT_STARTED | NOT_STARTED |
 | **C5** | 机器出口 (API/Feed/Changes/MCP) 与安全门禁拦截实现 | DEV Lead | PLANNED | NOT_RUN | NOT_STARTED | NOT_STARTED |
 
-当前已圆满完成 Phase 1 全套数据契约与 Phase 2 C1 强类型运行时校验器。后续开发正式进入 **Phase 2 核心代码实现：C2 切片（实体主数据适配器与解析客户端实现）**。
+当前已圆满完成 Phase 1 全套数据契约与 Phase 2 C1、C2（实体主数据适配器与解析客户端）。后续开发正式进入 **Phase 2 核心代码实现：C3 切片（Append-Only 版本链存储与发布签发状态机实现）**。
 
 ---
 
@@ -43,7 +43,7 @@
 
 - **正式主干控制器仓库**：`huangzuomin/WZCityTCDS-Open`
 - **主干分支**：`main`
-- **当前控制器不可变 SHA**：`b98b982bc52e9c422449cc17b2ed2f04870251c3`
+- **当前控制器不可变 SHA**：`20cf81b427e5ede78336447616bba4b2879007aa`
 - **GitHub 分支保护**：已配置必需状态检查与独立 App 审查要求
 - **独立审查身份**：`fpf-qa-bot-huangzuomin[bot]`（GitHub App ID: 5464827）
 - **本地工位布局**：`_fpf-workspaces/WZCITYTCDS_MVP/`（`bootstrap`、`dev`、`qa` 物理隔离工作树）
