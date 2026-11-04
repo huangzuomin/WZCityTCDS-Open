@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wzcitytcds.open/schemas/evidence-span.schema.json",
+  "title": "EvidenceSpan Traceability Contract",
+  "description": "Standard schema for immutable character-level evidence spans linking factual assertions to authoritative news source texts.",
+  "type": "object",
+  "required": [
+    "span_id",
+    "source_doc_id",
+    "paragraph_index",
+    "char_start",
+    "char_end",
+    "quoted_text",
+    "span_hash",
+    "extracted_at",
+    "quality_state"
+  ],
+  "properties": {
+    "span_id": {
+      "type": "string",
+      "pattern": "^span_[a-zA-Z0-9_-]{12,64}$",
+      "description": "Unique immutable identifier for this character-level evidence span."
+    },
+    "source_doc_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Document identifier in upstream CMS authority corresponding to source news event."
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical public or archive URL of the original source article."
+    },
+    "paragraph_index": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "0-based paragraph index within the source document."
+    },
+    "char_start": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "0-based inclusive character start offset within the referenced paragraph."
+    },
+    "char_end": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "0-based exclusive character end offset within the referenced paragraph."
+    },
+    "quoted_text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8192,
+      "description": "Exact verbatim excerpt extracted from source document."
+    },
+    "span_hash": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$",
+      "description": "SHA-256 cryptographic digest of quoted_text (UTF-8 encoded), preventing retroactive tampering."
+    },
+    "extracted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "extractor_metadata": {
+      "type": "object",
+      "properties": {
+        "engine_version": { "type": "string" },
+        "confidence_score": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "model_fingerprint": { "type": "string" },
+        "prompt_template_id": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "quality_state": {
+      "type": "string",
+      "enum": [
+        "VALIDATED",
+        "PENDING_VERIFICATION",
+        "STALE_SOURCE_RETRACTED",
+        "TAMPERED_HASH_MISMATCH"
+      ],
+      "description": "Current integrity and verification status of the evidence span."
+    }
+  },
+  "additionalProperties": false
+}

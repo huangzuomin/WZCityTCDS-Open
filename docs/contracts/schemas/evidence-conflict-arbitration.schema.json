@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wzcitytcds.open/schemas/evidence-conflict-arbitration.schema.json",
+  "title": "Evidence Conflict Arbitration Contract",
+  "description": "Standard schema for adjudicating multi-source evidence discrepancies, value conflicts, and authority hierarchies in WZCityTCDS.",
+  "type": "object",
+  "required": [
+    "arbitration_id",
+    "assertion_id",
+    "conflicting_spans",
+    "conflict_type",
+    "arbitration_status",
+    "created_at"
+  ],
+  "properties": {
+    "arbitration_id": {
+      "type": "string",
+      "pattern": "^arb_[a-zA-Z0-9_-]{12,64}$",
+      "description": "Unique identifier for this multi-source conflict arbitration record."
+    },
+    "assertion_id": {
+      "type": "string",
+      "pattern": "^ast_[a-zA-Z0-9_-]{12,64}$"
+    },
+    "conflicting_spans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["span_id", "source_doc_id", "reported_value", "source_authority_level"],
+        "properties": {
+          "span_id": { "type": "string" },
+          "source_doc_id": { "type": "string" },
+          "reported_value": {},
+          "source_authority_level": {
+            "type": "string",
+            "enum": ["OFFICIAL_GOVERNMENT_RELEASE", "STATE_MEDIA_PRIMARY", "LOCAL_MEDIA_REPORT", "COMMERCIAL_PORTAL"]
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 2
+    },
+    "conflict_type": {
+      "type": "string",
+      "enum": [
+        "NUMERICAL_DISCREPANCY",
+        "TEMPORAL_SCOPE_MISMATCH",
+        "STATUS_CONTRADICTION",
+        "GEOGRAPHIC_BOUNDARY_DIVERGENCE"
+      ]
+    },
+    "arbitration_status": {
+      "type": "string",
+      "enum": ["PENDING_ARBITRATION", "RESOLVED_ADOPTED", "RECONCILED_AS_RANGE", "REJECTED_UNRESOLVABLE"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "adjudication": {
+      "type": "object",
+      "properties": {
+        "adjudicated_at": { "type": "string", "format": "date-time" },
+        "arbitrator_id": { "type": "string" },
+        "chosen_decision": {
+          "type": "string",
+          "enum": [
+            "ADOPT_HIGHER_AUTHORITY",
+            "ADOPT_LATEST_TIMESTAMPS",
+            "PUBLISH_AS_ESTIMATED_RANGE",
+            "SUSPEND_PENDING_OFFICIAL_CLARIFICATION"
+          ]
+        },
+        "adopted_span_id": { "type": "string" },
+        "arbitration_rationale": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 2048
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

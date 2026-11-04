@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://wzcitytcds.open/schemas/evidence-verification-receipt.schema.json",
+  "title": "Evidence Verification Receipt Contract",
+  "description": "Standard schema for cryptographic verification receipts certifying evidence span integrity, text containment, and source validity.",
+  "type": "object",
+  "required": [
+    "receipt_id",
+    "assertion_id",
+    "revision_id",
+    "verified_at",
+    "verifier_engine_version",
+    "span_verifications",
+    "overall_verification_verdict",
+    "auditor_signature"
+  ],
+  "properties": {
+    "receipt_id": {
+      "type": "string",
+      "pattern": "^rcpt_[a-zA-Z0-9_-]{12,64}$",
+      "description": "Unique identifier for this evidence verification audit receipt."
+    },
+    "assertion_id": {
+      "type": "string",
+      "pattern": "^ast_[a-zA-Z0-9_-]{12,64}$"
+    },
+    "revision_id": {
+      "type": "string",
+      "pattern": "^rev_[a-zA-Z0-9_-]{12,64}$"
+    },
+    "verified_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "verifier_engine_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "span_verifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "span_id",
+          "span_hash_matched",
+          "source_doc_verified",
+          "paragraph_exact_match",
+          "check_status"
+        ],
+        "properties": {
+          "span_id": { "type": "string" },
+          "span_hash_matched": { "type": "boolean" },
+          "source_doc_verified": { "type": "boolean" },
+          "paragraph_exact_match": { "type": "boolean" },
+          "check_status": {
+            "type": "string",
+            "enum": ["PASS", "FAIL_HASH_MISMATCH", "FAIL_SOURCE_NOT_FOUND", "FAIL_TEXT_NOT_FOUND"]
+          },
+          "computed_hash": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "overall_verification_verdict": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "FAIL_HASH_MISMATCH",
+        "FAIL_SOURCE_RETRACTED",
+        "FAIL_TEXT_NOT_FOUND",
+        "FAIL_INSUFFICIENT_EVIDENCE"
+      ]
+    },
+    "auditor_signature": {
+      "type": "object",
+      "required": ["signature_type", "signer_identity", "digest_sha256"],
+      "properties": {
+        "signature_type": {
+          "type": "string",
+          "enum": ["ENGINE_HMAC", "SIGSTORE_OIDC", "SYSTEM_KEY"]
+        },
+        "signer_identity": { "type": "string" },
+        "digest_sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
