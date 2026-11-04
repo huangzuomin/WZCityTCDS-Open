@@ -31,6 +31,12 @@ from .outlets import (
     PublicationSecurityGatePolicy,
     ChangesStreamEvent,
 )
+from .hub_entity_adapter import (
+    HubEntityAdapter,
+    MockHubEntityTransport,
+    IHubEntityTransport,
+    assert_valid_entity_id,
+)
 
 __all__ = [
     "EntityCategory",
@@ -55,4 +61,8 @@ __all__ = [
     "PublicOutletDelivery",
     "PublicationSecurityGatePolicy",
     "ChangesStreamEvent",
+    "HubEntityAdapter",
+    "MockHubEntityTransport",
+    "IHubEntityTransport",
+    "assert_valid_entity_id",
 ]
