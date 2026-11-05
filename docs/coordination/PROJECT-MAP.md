@@ -1,7 +1,7 @@
 # WZCityTCDS 项目唯一事实地图（正式版）
 
 > **状态：`FORMAL_PROJECT_MAP_ACTIVE`**  
-> **当前控制器基线：`33b75878f9103f0e51af92c3dc7b21d54d09219c`**  
+> **当前控制器基线：`7175f8b61a190e80351cb2c5b474dbe9afd07dd3`**  
 > **主干仓库：`huangzuomin/WZCityTCDS-Open`（分支：`main`）**  
 > **治理规约：FPF 0.3 / 五权分立受控开发体系**
 
@@ -37,14 +37,16 @@
 
 当前已圆满完成 Phase 1 全套数据契约与 Phase 2 全部五个核心能力切片（C1 运行时模型校验器、C2 实体适配器、C3 修订存储与状态机、C4 证据验签与冲突仲裁、C5 公共分发出口与发布安全门禁）。**Phase 2 MVP 核心契约与引擎代码全部闭环**！后续进入 **Phase 3：独立服务运行时与端点接入阶段**。
 
-### 1.3 Phase 3：独立服务运行时与端点接入阶段（ACTIVE）
+### 1.3 Phase 3：独立服务运行时与端点接入阶段（COMPLETED）
 
 | 切片编号 | 模块 / 目标 | 负责人 | DEV 状态 | 独立 QA 裁决 | 主干合并状态 | 部署状态 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **R1** | 事实发布独立 HTTP 服务与公共出口路由 (`apps/api/` / Outlets Routes) (#24) | DEV Lead | COMPLETED | PASS | MERGED (f403e2be) | N/A |
 | **R2** | 审校工作台与采编接入 API (`apps/admin/` / Review Endpoints) (#26) | DEV Lead | COMPLETED | PASS | MERGED (33b75878) | N/A |
 | **R3** | 城市时空可信内容枢纽单向投影同步端与变更流消费端 (#28) | DEV Lead | COMPLETED | PASS | MERGED (4d59b48c) | N/A |
-| **R4** | 端到端集成冒烟测试与生产部署验收门禁 | DEV + QA | ACTIVE | NOT_RUN | READY_FOR_DEV | NOT_STARTED |
+| **R4** | 端到端集成冒烟测试与生产部署验收门禁 (#30) | DEV + QA | COMPLETED | PASS | MERGED (7175f8b6) | N/A |
+
+当前已圆满完成 Phase 1 架构与数据契约设计（S1-S5）、Phase 2 MVP 核心能力与引擎实现（C1-C5）、以及 Phase 3 独立服务运行时与端点接入（R1-R4）。**WZCityTCDS 系统全阶段研发与实机独立 QA 验收全量闭环**！
 
 ---
 
@@ -52,7 +54,7 @@
 
 - **正式主干控制器仓库**：`huangzuomin/WZCityTCDS-Open`
 - **主干分支**：`main`
-- **当前控制器不可变 SHA**：`4d59b48c1bcd9084a1f267ef4ce46f95020c4999`
+- **当前控制器不可变 SHA**：`7175f8b61a190e80351cb2c5b474dbe9afd07dd3`
 - **GitHub 分支保护**：已配置必需状态检查与独立 App 审查要求
 - **独立审查身份**：`fpf-qa-bot-huangzuomin[bot]`（GitHub App ID: 5464827）
 - **本地工位布局**：`_fpf-workspaces/WZCITYTCDS_MVP/`（`bootstrap`、`dev`、`qa` 物理隔离工作树）
@@ -152,4 +154,6 @@
   - PR #26 (`kind: DEV_HANDOFF`，commit: `33b75878`，R2 审校工作台与采编接入 API)
   - PR #27 (`kind: MAP_UPDATE`，commit: `d73fa67`，R2 收官与 R3 激活)
   - PR #28 (`kind: DEV_HANDOFF`，commit: `4d59b48c`，R3 枢纽单向投影同步与变更流消费)
-- **当前执行里程碑**：Phase 3 切片 R3 已顺利完成交付并合入主干（Commit `4d59b48c`），当前活跃推进 **R4 端到端集成冒烟测试与生产部署验收门禁** 切片。
+  - PR #29 (`kind: MAP_UPDATE`，commit: `90058b0b`，R3 收官与 R4 激活)
+  - PR #30 (`kind: DEV_HANDOFF`，commit: `7175f8b6`，R4 端到端集成冒烟测试与生产部署验收门禁)
+- **当前执行里程碑**：Phase 3 切片 R4 端到端集成冒烟测试与生产部署验收门禁已顺利完成交付并合入主干（Commit `7175f8b6`）。至此，Phase 1、Phase 2、Phase 3 全套 14 张工作令全量研发、自动化测试与实机独立 QA 验收已实现 100% 闭环。
