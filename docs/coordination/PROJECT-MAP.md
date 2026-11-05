@@ -43,8 +43,8 @@
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **R1** | 事实发布独立 HTTP 服务与公共出口路由 (`apps/api/` / Outlets Routes) (#24) | DEV Lead | COMPLETED | PASS | MERGED (f403e2be) | N/A |
 | **R2** | 审校工作台与采编接入 API (`apps/admin/` / Review Endpoints) (#26) | DEV Lead | COMPLETED | PASS | MERGED (33b75878) | N/A |
-| **R3** | 城市时空可信内容枢纽单向投影同步端与变更流消费端 | DEV Lead | ACTIVE | NOT_RUN | NOT_STARTED | NOT_STARTED |
-| **R4** | 端到端集成冒烟测试与生产部署验收门禁 | DEV + QA | PLANNED | NOT_RUN | NOT_STARTED | NOT_STARTED |
+| **R3** | 城市时空可信内容枢纽单向投影同步端与变更流消费端 (#28) | DEV Lead | COMPLETED | PASS | MERGED (4d59b48c) | N/A |
+| **R4** | 端到端集成冒烟测试与生产部署验收门禁 | DEV + QA | ACTIVE | NOT_RUN | READY_FOR_DEV | NOT_STARTED |
 
 ---
 
@@ -52,7 +52,7 @@
 
 - **正式主干控制器仓库**：`huangzuomin/WZCityTCDS-Open`
 - **主干分支**：`main`
-- **当前控制器不可变 SHA**：`f403e2be78c7bfc774c91b052643fe8fdc2925eb`
+- **当前控制器不可变 SHA**：`4d59b48c1bcd9084a1f267ef4ce46f95020c4999`
 - **GitHub 分支保护**：已配置必需状态检查与独立 App 审查要求
 - **独立审查身份**：`fpf-qa-bot-huangzuomin[bot]`（GitHub App ID: 5464827）
 - **本地工位布局**：`_fpf-workspaces/WZCITYTCDS_MVP/`（`bootstrap`、`dev`、`qa` 物理隔离工作树）
@@ -150,4 +150,6 @@
   - PR #24 (`kind: DEV_HANDOFF`，commit: `f403e2be`，R1 事实发布独立 HTTP 服务与公共出口路由)
   - PR #25 (`kind: MAP_UPDATE`，commit: `20e20a3f`，R1 收官与 R2 激活)
   - PR #26 (`kind: DEV_HANDOFF`，commit: `33b75878`，R2 审校工作台与采编接入 API)
-- **当前执行里程碑**：Phase 3 切片 R2 已顺利完成交付并合入主干，当前活跃推进 **R3 城市时空可信内容枢纽单向投影同步端与变更流消费端** 切片。
+  - PR #27 (`kind: MAP_UPDATE`，commit: `d73fa67`，R2 收官与 R3 激活)
+  - PR #28 (`kind: DEV_HANDOFF`，commit: `4d59b48c`，R3 枢纽单向投影同步与变更流消费)
+- **当前执行里程碑**：Phase 3 切片 R3 已顺利完成交付并合入主干（Commit `4d59b48c`），当前活跃推进 **R4 端到端集成冒烟测试与生产部署验收门禁** 切片。
