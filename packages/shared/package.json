@@ -19,7 +19,7 @@
     "build": "tsc -p tsconfig.json",
     "dev": "tsc -p tsconfig.json --watch",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test": "node dist/contracts/verify.spec.js && node dist/adapters/hub-entity.spec.js && node dist/revision/revision-storage.spec.js && node dist/evidence/evidence.spec.js && node dist/outlets/outlets.spec.js && node dist/outlets/http-router.spec.js",
+    "test": "node dist/contracts/verify.spec.js && node dist/adapters/hub-entity.spec.js && node dist/revision/revision-storage.spec.js && node dist/evidence/evidence.spec.js && node dist/outlets/outlets.spec.js && node dist/outlets/http-router.spec.js && node dist/review/workbench.spec.js",
     "clean": "rimraf dist"
   },
   "dependencies": {

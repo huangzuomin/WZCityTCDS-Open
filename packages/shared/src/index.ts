@@ -10,3 +10,4 @@ export * from './adapters/index.js';
 export * from './revision/index.js';
 export * from './evidence/index.js';
 export * from './outlets/index.js';
+export * from './review/index.js';

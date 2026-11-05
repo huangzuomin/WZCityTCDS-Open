@@ -55,6 +55,20 @@ from .outlets_engine import (
     ChangesStreamManager,
     compute_stream_event_digest,
 )
+from .review_workbench import (
+    ReviewWorkbenchManager,
+    ReviewTask,
+    ReviewTaskStatus,
+    ReviewPriority,
+    ReviewActionType,
+    CandidateAssertion,
+    ReviewAuditEntry,
+    ReviewConflictContext,
+    ReviewResult,
+    IngestCandidateParams,
+    ListReviewTasksFilter,
+)
+
 from .outlets_http import (
     OutletsHttpRouter,
     OutletsHttpRequest,
@@ -107,4 +121,15 @@ __all__ = [
     "OutletsHttpResponse",
     "SnapshotRecord",
     "OutletsStore",
+    "ReviewWorkbenchManager",
+    "ReviewTask",
+    "ReviewTaskStatus",
+    "ReviewPriority",
+    "ReviewActionType",
+    "CandidateAssertion",
+    "ReviewAuditEntry",
+    "ReviewConflictContext",
+    "ReviewResult",
+    "IngestCandidateParams",
+    "ListReviewTasksFilter",
 ]

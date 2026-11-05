@@ -33,6 +33,7 @@ import { DevModule } from './modules/dev/dev.module';
 import { McpModule } from './modules/mcp/mcp.module';
 import { FactsAgentModule } from './modules/facts-agent/facts-agent.module';
 import { OutletsModule } from './modules/outlets/outlets.module';
+import { ReviewModule } from './modules/review/review.module';
 
 @Module({
   imports: [
@@ -68,6 +69,7 @@ import { OutletsModule } from './modules/outlets/outlets.module';
     McpModule,
     FactsAgentModule,
     OutletsModule,
+    ReviewModule,
   ],
   providers: [
     // API 默认全量鉴权：@Public() 显式放开（展示层只读接口）
