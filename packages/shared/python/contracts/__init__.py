@@ -68,13 +68,23 @@ from .review_workbench import (
     IngestCandidateParams,
     ListReviewTasksFilter,
 )
-
 from .outlets_http import (
     OutletsHttpRouter,
     OutletsHttpRequest,
     OutletsHttpResponse,
     SnapshotRecord,
     OutletsStore,
+)
+from .hub_projection import (
+    HubProjectionTarget,
+    HubProjectionPayload,
+    HubProjectionReceipt,
+    HubProjectionReceiptStatus,
+    HubUpstreamChangeType,
+    HubUpstreamChangeEvent,
+    HubOneWayProjector,
+    ChangesStreamConsumer,
+    MockHubProjectionTransport,
 )
 
 __all__ = [
@@ -132,4 +142,13 @@ __all__ = [
     "ReviewResult",
     "IngestCandidateParams",
     "ListReviewTasksFilter",
+    "HubProjectionTarget",
+    "HubProjectionPayload",
+    "HubProjectionReceipt",
+    "HubProjectionReceiptStatus",
+    "HubUpstreamChangeType",
+    "HubUpstreamChangeEvent",
+    "HubOneWayProjector",
+    "ChangesStreamConsumer",
+    "MockHubProjectionTransport",
 ]

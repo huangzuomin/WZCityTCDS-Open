@@ -3,6 +3,7 @@ export * from './source-news.js';
 export * from './fact-revision.js';
 export * from './evidence.js';
 export * from './outlets.js';
+export * from './hub-projection.js';
 
 import { z } from 'zod';
 

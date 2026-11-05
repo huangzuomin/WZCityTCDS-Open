@@ -303,6 +303,14 @@ def run_tests():
     total += res_review.testsRun
     passed += res_review.testsRun
 
+    # 19. Hub One-Way Projection & Changes Stream Consumer Tests (Slice R3)
+    from packages.shared.python.contracts.test_hub_projection import TestHubProjection
+    suite_hub = unittest.TestLoader().loadTestsFromTestCase(TestHubProjection)
+    res_hub = runner.run(suite_hub)
+    assert res_hub.wasSuccessful(), f"HubProjection tests failed: {len(res_hub.errors)} errors, {len(res_hub.failures)} failures"
+    total += res_hub.testsRun
+    passed += res_hub.testsRun
+
     print(f"\n=== Python Pydantic, Entity Adapter, Revision Storage, Evidence Engine, Outlets Gate & Review Workbench Test Suite Results ===")
     print(f"Total: {total}, Passed: {passed}, Failed: {total - passed}")
     print(f"ALL {total} PYTHON CHECKS PASSED!\n")
