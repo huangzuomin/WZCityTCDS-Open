@@ -1,7 +1,7 @@
 # WZCityTCDS 项目唯一事实地图（正式版）
 
 > **状态：`FORMAL_PROJECT_MAP_ACTIVE`**  
-> **当前控制器基线：`f403e2be78c7bfc774c91b052643fe8fdc2925eb`**  
+> **当前控制器基线：`33b75878f9103f0e51af92c3dc7b21d54d09219c`**  
 > **主干仓库：`huangzuomin/WZCityTCDS-Open`（分支：`main`）**  
 > **治理规约：FPF 0.3 / 五权分立受控开发体系**
 
@@ -42,8 +42,8 @@
 | 切片编号 | 模块 / 目标 | 负责人 | DEV 状态 | 独立 QA 裁决 | 主干合并状态 | 部署状态 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **R1** | 事实发布独立 HTTP 服务与公共出口路由 (`apps/api/` / Outlets Routes) (#24) | DEV Lead | COMPLETED | PASS | MERGED (f403e2be) | N/A |
-| **R2** | 审校工作台与采编接入 API (`apps/admin/` / Review Endpoints) | DEV Lead | ACTIVE | NOT_RUN | NOT_STARTED | NOT_STARTED |
-| **R3** | 城市时空可信内容枢纽单向投影同步端与变更流消费端 | DEV Lead | PLANNED | NOT_RUN | NOT_STARTED | NOT_STARTED |
+| **R2** | 审校工作台与采编接入 API (`apps/admin/` / Review Endpoints) (#26) | DEV Lead | COMPLETED | PASS | MERGED (33b75878) | N/A |
+| **R3** | 城市时空可信内容枢纽单向投影同步端与变更流消费端 | DEV Lead | ACTIVE | NOT_RUN | NOT_STARTED | NOT_STARTED |
 | **R4** | 端到端集成冒烟测试与生产部署验收门禁 | DEV + QA | PLANNED | NOT_RUN | NOT_STARTED | NOT_STARTED |
 
 ---
@@ -148,4 +148,6 @@
   - PR #22 (`kind: DEV_HANDOFF`，commit: `4774bd7a`，C5 公共分发端与安全网关)
   - PR #23 (`kind: MAP_UPDATE`，commit: `46e12dae`，Phase 2 MVP 全量闭环与 Phase 3 规划)
   - PR #24 (`kind: DEV_HANDOFF`，commit: `f403e2be`，R1 事实发布独立 HTTP 服务与公共出口路由)
-- **当前执行里程碑**：Phase 3 切片 R1 已顺利完成交付并合入主干，当前活跃推进 **R2 审校工作台与采编接入 API** 切片。
+  - PR #25 (`kind: MAP_UPDATE`，commit: `20e20a3f`，R1 收官与 R2 激活)
+  - PR #26 (`kind: DEV_HANDOFF`，commit: `33b75878`，R2 审校工作台与采编接入 API)
+- **当前执行里程碑**：Phase 3 切片 R2 已顺利完成交付并合入主干，当前活跃推进 **R3 城市时空可信内容枢纽单向投影同步端与变更流消费端** 切片。
