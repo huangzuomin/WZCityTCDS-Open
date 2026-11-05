@@ -311,7 +311,15 @@ def run_tests():
     total += res_hub.testsRun
     passed += res_hub.testsRun
 
-    print(f"\n=== Python Pydantic, Entity Adapter, Revision Storage, Evidence Engine, Outlets Gate & Review Workbench Test Suite Results ===")
+    # 20. End-to-End Integration & Smoke Acceptance Tests (Slice R4)
+    from packages.shared.python.contracts.test_e2e_integration import TestE2EIntegration
+    suite_e2e = unittest.TestLoader().loadTestsFromTestCase(TestE2EIntegration)
+    res_e2e = runner.run(suite_e2e)
+    assert res_e2e.wasSuccessful(), f"E2EIntegration tests failed: {len(res_e2e.errors)} errors, {len(res_e2e.failures)} failures"
+    total += res_e2e.testsRun
+    passed += res_e2e.testsRun
+
+    print(f"\n=== Python Pydantic, Entity Adapter, Revision Storage, Evidence Engine, Outlets Gate, Review Workbench & E2E Test Suite Results ===")
     print(f"Total: {total}, Passed: {passed}, Failed: {total - passed}")
     print(f"ALL {total} PYTHON CHECKS PASSED!\n")
 

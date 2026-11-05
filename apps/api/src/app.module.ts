@@ -35,6 +35,7 @@ import { FactsAgentModule } from './modules/facts-agent/facts-agent.module';
 import { OutletsModule } from './modules/outlets/outlets.module';
 import { ReviewModule } from './modules/review/review.module';
 import { HubSyncModule } from './modules/hub-sync/hub-sync.module';
+import { HealthModule } from './modules/health/health.module';
 
 @Module({
   imports: [
@@ -72,6 +73,7 @@ import { HubSyncModule } from './modules/hub-sync/hub-sync.module';
     OutletsModule,
     ReviewModule,
     HubSyncModule,
+    HealthModule,
   ],
   providers: [
     // API 默认全量鉴权：@Public() 显式放开（展示层只读接口）
