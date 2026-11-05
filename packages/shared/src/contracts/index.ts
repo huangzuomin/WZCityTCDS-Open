@@ -4,6 +4,7 @@ export * from './fact-revision.js';
 export * from './evidence.js';
 export * from './outlets.js';
 export * from './hub-projection.js';
+export * from './e2e.js';
 
 import { z } from 'zod';
 

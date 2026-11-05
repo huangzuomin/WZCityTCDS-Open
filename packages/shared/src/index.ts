@@ -12,3 +12,4 @@ export * from './evidence/index.js';
 export * from './outlets/index.js';
 export * from './review/index.js';
 export * from './hub/index.js';
+export * from './e2e/index.js';

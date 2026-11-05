@@ -86,6 +86,16 @@ from .hub_projection import (
     ChangesStreamConsumer,
     MockHubProjectionTransport,
 )
+from .e2e_integration import (
+    SubsystemStatus,
+    ComponentHealth,
+    SystemHealthReport,
+    E2EExecutionStep,
+    E2EPipelineResult,
+    EndToEndIntegrationPipeline,
+    SystemHealthEvaluator,
+    InMemoryOutletsStore,
+)
 
 __all__ = [
     "EntityCategory",
@@ -151,4 +161,12 @@ __all__ = [
     "HubOneWayProjector",
     "ChangesStreamConsumer",
     "MockHubProjectionTransport",
+    "SubsystemStatus",
+    "ComponentHealth",
+    "SystemHealthReport",
+    "E2EExecutionStep",
+    "E2EPipelineResult",
+    "EndToEndIntegrationPipeline",
+    "SystemHealthEvaluator",
+    "InMemoryOutletsStore",
 ]
