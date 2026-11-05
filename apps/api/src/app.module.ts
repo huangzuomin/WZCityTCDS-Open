@@ -34,6 +34,7 @@ import { McpModule } from './modules/mcp/mcp.module';
 import { FactsAgentModule } from './modules/facts-agent/facts-agent.module';
 import { OutletsModule } from './modules/outlets/outlets.module';
 import { ReviewModule } from './modules/review/review.module';
+import { HubSyncModule } from './modules/hub-sync/hub-sync.module';
 
 @Module({
   imports: [
@@ -70,6 +71,7 @@ import { ReviewModule } from './modules/review/review.module';
     FactsAgentModule,
     OutletsModule,
     ReviewModule,
+    HubSyncModule,
   ],
   providers: [
     // API 默认全量鉴权：@Public() 显式放开（展示层只读接口）
